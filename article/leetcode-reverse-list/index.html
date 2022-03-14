@@ -28,11 +28,11 @@
     </script>
     <title>
         
-          About - 何浪 | 博客
+          反转链表 - 何浪 | 博客
         
     </title>
 
-    <link rel="canonical" href="http://www.helang.site/about/">
+    <link rel="canonical" href="http://www.helang.site/article/leetcode-reverse-list/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -83,8 +83,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/about.jpg')
-            /*page*/
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
         
     }
     
@@ -97,10 +97,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">一入前端深似海，从此再无安宁日</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                            
+                        </div>
+                        <h1>反转链表</h1>
+                        <h2 class="subheading">算法联系</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2022-03-13
+                        </span>
                     </div>
                 
 
@@ -203,180 +211,165 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3><span id="一句话">一句话</span></h3>
-<blockquote>
-<p>一位奋进在WEB前端道路上的掘金者</p>
-</blockquote>
-<h3><span id="关于我">关于我</span></h3>
-<blockquote>
-<p>爱技术、爱思考、爱折腾、爱运动、爱自由</p>
-<p>对生活充满热情，对工作充满激情，对家庭充满憧憬！</p>
-</blockquote>
-<h3><span id="兴趣方向">兴趣方向</span></h3>
-<blockquote>
-<p>WEB前端（React、React Native、VUE）相关生态技术研究。</p>
-</blockquote>
-<h3><span id="参与社区">参与社区</span></h3>
-<blockquote>
-<p>react中国: <a href="http://react-china.org/u/clown-helang/" target="_blank" rel="noopener">http://react-china.org/u/clown-helang/</a></p>
-<p>Github: <a href="https://github.com/clown-helang" target="_blank" rel="noopener">https://github.com/clown-helang</a></p>
-</blockquote>
-<h3><span id="联系我">联系我</span></h3>
-<blockquote>
-<p>Email: <a href="mailto:sust_helang@126.com" target="_blank" rel="noopener">sust_helang@126.com</a></p>
-</blockquote>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h2><span id="题目">题目</span></h2>
+<p>将链表的顺序翻转过来</p>
+<p>例：</p>
+<ul>
+<li>输入：1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</li>
+<li>输出：5 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 1</li>
+</ul>
+<p>使用两种方式解题</p>
+<h2><span id="解题">解题</span></h2>
+<h3><span id="方法一迭代">方法一：迭代</span></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prev = <span class="literal">null</span>,</span><br><span class="line">    next;</span><br><span class="line">  <span class="keyword">let</span> curr = head;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (curr) &#123;</span><br><span class="line">    next = curr.next;</span><br><span class="line">    curr.next = prev;</span><br><span class="line">    prev = curr;</span><br><span class="line">    curr = next;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="方法二递归">方法二：递归</span></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="literal">null</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">recursion</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node === <span class="literal">null</span> || node.next === <span class="literal">null</span>) &#123;</span><br><span class="line">      result = node;</span><br><span class="line">      <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> prevNode = recursion(node.next);</span><br><span class="line"></span><br><span class="line">    prevNode.next = node;</span><br><span class="line">    node.next = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">  &#125;</span><br><span class="line">  recursion(head);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/parsing-engine/" data-toggle="tooltip" data-placement="top" title="JS类SQL语句解析引擎">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
                 <br>
-
+                
                 <!-- require APlayer -->
                 
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+                <!-- duoshuo Share start -->
                 
-                    <div class="aplayer"
-                        data-id="2312165875"
-                        data-server="netease"
-                        data-type="playlist"
-                        data-fixed="false" >
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">解题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">方法一：迭代</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">方法二：递归</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                        
                     </div>
+                </section>
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- Friends Blog -->
                 
-                    <hr>
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
                     
-
-                    
-
-                    
-
-                    
-
-                    
-
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Nginx" title="Nginx" rel="4">Nginx</a>
-            
-        
-            
-            <a href="/tags/#Javascript" title="Javascript" rel="6">Javascript</a>
-            
-        
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/avatar.jpg" />
-        
 
-        
-            <p>Stay hungry,Stay foolish</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/clown-helang">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        <!-- Friends Blog -->
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
