@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="何浪，WEB前端开发工程师，擅长React、React Native、Vue、HTML、CSS、JavaScript、微信小程序开发">
+    <meta name="keyword" content="何浪,WEB前端开发工程师,React,React Native,Vue,HTML,CSS,JavaScript,微信小程序开发,Nginx,Tomcat,思想是生命的奴隶,生命是时间的弄人">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <title>
+        
+          JS类SQL语句解析引擎 - 何浪 | 博客
+        
+    </title>
+
+    <link rel="canonical" href="http://www.helang.site/article/parsing-engine/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                            
+                        </div>
+                        <h1>JS类SQL语句解析引擎</h1>
+                        <h2 class="subheading">JS解析引擎概念应用</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2021-05-23
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">何浪</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="前言">前言</span></h2>
+<p>思考一下，如果我们现在有下面一段纯文本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(创建时间 属于 &quot;当天&quot;) AND (处置状态 属于 &quot;待处置,处置中,已处置&quot; AND 处置人 是否为空 &quot;否&quot;)</span><br></pre></td></tr></table></figure>
+<p>现在需要解析成下面的一个树形结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">  &apos;statements&apos;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;创建时间&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">      &apos;value&apos;: &apos;当天&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">      &apos;statements&apos;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置状态&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">          &apos;value&apos;: [</span><br><span class="line">            &apos;待处置&apos;,</span><br><span class="line">            &apos;处置中&apos;,</span><br><span class="line">            &apos;已处置&apos;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置人&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;是否为空&apos;,</span><br><span class="line">          &apos;value&apos;: &apos;否&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们该如何做呢？</p>
+<h2><span id="功能分析">功能分析</span></h2>
+<p>将一段纯文本解析为一个具有层级关系的语法树，从结果来看，这个过程与<code>JS</code>的代码解析执行过程是极其相似的，势必需要经过词法分析、语法分析和语义分析这三个阶段。这里我们可以不考虑最终生成的语法树是否符合语义。只要语法树的层级关系正确即可。</p>
+<h2><span id="功能设计">功能设计</span></h2>
+<h3><span id="词法分析">词法分析</span></h3>
+<p>从左至右依次遍历每个字符，以空格作为分隔符，将整个纯文本分割成若干个<code>token</code>，最终生成内容如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// tokens</span><br><span class="line">[&apos;(&apos;, &apos;创建时间&apos;, &apos;属于&apos;, &apos;&quot;当天&quot;&apos;, &apos;)&apos;, &apos;AND&apos;, &apos;(&apos;, &apos;处置状态&apos;, &apos;属于&apos;, &apos;&quot;待处置,处置中,已处置&quot;&apos;, &apos;AND&apos;, &apos;处置人&apos;, &apos;是否为空&apos;, &apos;&quot;否&quot;&apos;, &apos;)&apos;];</span><br></pre></td></tr></table></figure>
+<p>生成的过程中可以对于内容进行基本<code>词法校验</code>,例如：是否缺少<code>&quot;</code>、<code>(</code>、<code>)</code>、<code>'</code>等</p>
+<h3><span id="语法分析">语法分析</span></h3>
+<p>经过词法分析后我们可以拿到一组<code>tokens</code>,那么我们该如何将它们解析成具体的语法树呢？这个时候我们就需要对每一个<code>token</code>的含义进行分析了。举个小栗子：<code>创建时间 属于 &quot;当天&quot;</code>。整个语句中可以划分为三个角色：<code>关键字</code>、<code>操作符</code>、<code>操作值</code>。有了这个概念之后，那么其他部分也就可以同样进行角色的划分，那么我们就可以得出下面这些角色：</p>
+<ul>
+<li><code>关键字</code>：<code>创建时间</code>、<code>处置状态</code>、<code>处置人</code></li>
+<li><code>操作符</code>：<code>属于</code>、<code>是否为空</code></li>
+<li><code>操作值</code>：<code>当天</code>、<code>&quot;待处置,处置中,已处置&quot;</code>、<code>否</code></li>
+<li><code>关系符</code>：<code>AND</code>、<code>OR</code></li>
+<li><code>结束符</code>：<code>(</code>、<code>)</code></li>
+</ul>
+<p>有了这些角色之后我们就可以进行具体的语法分析了。</p>
+<p>第一步：遍历<code>tokens</code>，解析最小表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &apos;(&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;创建时间&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">      &apos;value&apos;: &apos;当天&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;)&apos;,</span><br><span class="line">    &apos;AND&apos;,</span><br><span class="line">    &apos;(&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;处置状态&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">      &apos;value&apos;: [</span><br><span class="line">        &apos;待处置&apos;,</span><br><span class="line">        &apos;处置中&apos;,</span><br><span class="line">        &apos;已处置&apos;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;AND&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;处置人&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;是否为空&apos;,</span><br><span class="line">      &apos;value&apos;: &apos;否&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;)&apos;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>第二步：生成逻辑组合最小表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &apos;(&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;创建时间&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">      &apos;value&apos;: &apos;当天&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;)&apos;,</span><br><span class="line">    &apos;AND&apos;,</span><br><span class="line">    &apos;(&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">      &apos;statements&apos;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置状态&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">          &apos;value&apos;: [</span><br><span class="line">            &apos;待处置&apos;,</span><br><span class="line">            &apos;处置中&apos;,</span><br><span class="line">            &apos;已处置&apos;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置人&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;是否为空&apos;,</span><br><span class="line">          &apos;value&apos;: &apos;否&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;)&apos;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>第三步：去括号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;identifier&apos;: &apos;创建时间&apos;,</span><br><span class="line">      &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">      &apos;value&apos;: &apos;当天&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &apos;AND&apos;,</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">      &apos;statements&apos;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置状态&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">          &apos;value&apos;: [</span><br><span class="line">            &apos;待处置&apos;,</span><br><span class="line">            &apos;处置中&apos;,</span><br><span class="line">            &apos;已处置&apos;</span><br><span class="line">          ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;处置人&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;是否为空&apos;,</span><br><span class="line">          &apos;value&apos;: &apos;否&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>第四步：递归前三步，直到<code>tokens</code>长度为1时，返回<code>tokens[0]</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">      &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">      &apos;statements&apos;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;identifier&apos;: &apos;创建时间&apos;,</span><br><span class="line">          &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">          &apos;value&apos;: &apos;当天&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &apos;relation&apos;: &apos;AND&apos;,</span><br><span class="line">          &apos;statements&apos;: [</span><br><span class="line">            &#123;</span><br><span class="line">              &apos;identifier&apos;: &apos;处置状态&apos;,</span><br><span class="line">              &apos;operator&apos;: &apos;属于&apos;,</span><br><span class="line">              &apos;value&apos;: [</span><br><span class="line">                &apos;待处置&apos;,</span><br><span class="line">                &apos;处置中&apos;,</span><br><span class="line">                &apos;已处置&apos;</span><br><span class="line">              ]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">              &apos;identifier&apos;: &apos;处置人&apos;,</span><br><span class="line">              &apos;operator&apos;: &apos;是否为空&apos;,</span><br><span class="line">              &apos;value&apos;: &apos;否&apos;</span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>至此，我们变可以拿到我们想要的语法树（AST）了,在解析最小表达式的过程中，我也可以进行基础的语法校验，比如是否符合: <code>关键字</code> <code>操作符</code> <code>值</code> 的基本格式等。</p>
+<h2><span id="功能实现">功能实现</span></h2>
+<h3><span id="解析引擎">解析引擎</span></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// parsing-engine.js</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ParsingEngine 解析引擎</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> &#123; isValue, isNumber, isString, isObject, formatValue &#125; <span class="keyword">from</span> <span class="string">'./utils'</span>;</span><br><span class="line"><span class="keyword">const</span> LEFT_BRACKET = <span class="string">'('</span>;</span><br><span class="line"><span class="keyword">const</span> RIGHT_BRACKET = <span class="string">')'</span>;</span><br><span class="line"><span class="keyword">const</span> END_SYMBOLS = [LEFT_BRACKET, RIGHT_BRACKET, <span class="string">' '</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParsingEngine</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(&#123;relations, operations, identifiers&#125;) &#123;</span><br><span class="line">    <span class="keyword">this</span>.relations = relations || [<span class="string">'AND'</span>, <span class="string">'OR'</span>];</span><br><span class="line">    <span class="keyword">this</span>.operations = operations || [];</span><br><span class="line">    <span class="keyword">this</span>.tokens = [];</span><br><span class="line">    <span class="keyword">this</span>.identifiers = identifiers;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 词法分析</span></span><br><span class="line"><span class="comment">  * <span class="doctag">@param <span class="type">&#123;String&#125;</span> <span class="variable">str</span></span></span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  lex(str) &#123;</span><br><span class="line">    <span class="keyword">this</span>.lexCheck(str);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> tokens = [], token = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">      <span class="keyword">const</span> char = str.charAt(i);</span><br><span class="line">      <span class="keyword">if</span> (!END_SYMBOLS.includes(char)) &#123;</span><br><span class="line">        token += char;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        token &amp;&amp; (tokens.push(token), token = <span class="string">''</span>);</span><br><span class="line">        tokens.push(char);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    tokens = tokens.filter(<span class="function"><span class="params">v</span> =&gt;</span> v !== <span class="string">' '</span>);</span><br><span class="line">    <span class="keyword">this</span>.tokens = tokens;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 词法校验</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param <span class="type">&#123;String&#125;</span> <span class="variable">str</span></span></span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  lexCheck(str) &#123;</span><br><span class="line">    <span class="keyword">const</span> leftBracketLength = str.split(LEFT_BRACKET).length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> rightBracketLength = str.split(RIGHT_BRACKET).length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">const</span> differenceValue = leftBracketLength - rightBracketLength;</span><br><span class="line">    <span class="keyword">if</span> (differenceValue !== <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`语法错误: 缺少 "<span class="subst">$&#123;differenceValue &gt; <span class="number">0</span> ? RIGHT_BRACKET : LEFT_BRACKET&#125;</span>"`</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> doubleQuoteLength = str.split(<span class="string">'"'</span>).length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (doubleQuoteLength % <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'语法错误: 缺少 \'"\''</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> singleQuoteLength =  str.split(<span class="string">'\''</span>).length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (singleQuoteLength % <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'语法错误: 缺少 "\'"'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * 语法分析</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  parser() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; tokens, relations, operations &#125; = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 1. 解析最小表达式</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    tokens.forEach(<span class="function">(<span class="params">token, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (!<span class="keyword">this</span>.grammarCheck(token, tokens[index + <span class="number">1</span>])) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`语法错误："<span class="subst">$&#123;token&#125;</span> <span class="subst">$&#123;tokens[index + <span class="number">1</span>]&#125;</span>"`</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (operations.includes(token)) &#123;</span><br><span class="line">        <span class="keyword">const</span> identifier = tokens[index - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> value = tokens[index + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (isNumber(value)) value = (+value);</span><br><span class="line">        <span class="keyword">if</span> (isString(value)) value = formatValue(value);</span><br><span class="line">        <span class="keyword">const</span> statement = &#123; identifier, <span class="attr">operator</span>: token, value &#125;;</span><br><span class="line"></span><br><span class="line">        tokens[index - <span class="number">1</span>] = statement;</span><br><span class="line">        tokens.splice(index, <span class="number">2</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 2. 逻辑组合最小表达式</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    tokens.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (relations.includes(item)) &#123;</span><br><span class="line">        <span class="keyword">const</span> left = tokens[index - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">const</span> right = tokens[index + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isObject(left) &amp;&amp; isObject(right)) &#123;</span><br><span class="line">          <span class="keyword">if</span> (left.statements &amp;&amp; left.relation === item) &#123;</span><br><span class="line">            left.statements.push(right);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> statement = &#123;</span><br><span class="line">              relation: item,</span><br><span class="line">              statements: [left, right]</span><br><span class="line">            &#125;;</span><br><span class="line">            tokens[index - <span class="number">1</span>] = statement;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          tokens.splice(index, <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 3. 去括号</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    tokens.forEach(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (isObject(item)) &#123;</span><br><span class="line">        <span class="keyword">const</span> isLeftBracket = tokens[index - <span class="number">1</span>] === LEFT_BRACKET;</span><br><span class="line">        <span class="keyword">const</span> isRightBracket = tokens[index + <span class="number">1</span>] === RIGHT_BRACKET;</span><br><span class="line">        <span class="keyword">const</span> isBracket = isLeftBracket &amp;&amp; isRightBracket;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isBracket) &#123;</span><br><span class="line">          tokens[index - <span class="number">1</span>] = item;</span><br><span class="line">          tokens.splice(index, <span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 4. 递归</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span> (tokens.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.tokens = tokens;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.parser();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tokens[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 语法校验</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  grammarCheck(prev, next) &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - ( 创建时间</span></span><br><span class="line"><span class="comment">     * - ( (</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isBracketBegin = (LEFT_BRACKET === prev) &amp;&amp; (<span class="keyword">this</span>.identifiers.includes(next) || LEFT_BRACKET === next || isObject(next));</span><br><span class="line">    <span class="keyword">if</span> (isBracketBegin) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - 创建时间 属于</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isStatementLeft = <span class="keyword">this</span>.identifiers.includes(prev) &amp;&amp; <span class="keyword">this</span>.operations.includes(next);</span><br><span class="line">    <span class="keyword">if</span> (isStatementLeft) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - 属于 "当天"</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isStatementRight = <span class="keyword">this</span>.operations.includes(prev) &amp;&amp; isValue(next);</span><br><span class="line">    <span class="keyword">if</span> (isStatementRight) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - &#123; identifier: '剩余天数', operator: '&gt;=', value: 3  &#125; AND</span></span><br><span class="line"><span class="comment">     * - ) OR</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isRelationLeft = (RIGHT_BRACKET === prev || isObject(prev)) &amp;&amp; <span class="keyword">this</span>.relations.includes(next);</span><br><span class="line">    <span class="keyword">if</span> (isRelationLeft) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - AND (</span></span><br><span class="line"><span class="comment">     * - AND &#123; identifier: '剩余天数', operator: '&gt;=', value: 3  &#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isRelationRight = <span class="keyword">this</span>.relations.includes(prev) &amp;&amp; (LEFT_BRACKET === next || isObject(next));</span><br><span class="line">    <span class="keyword">if</span> (isRelationRight) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * -  当天 )</span></span><br><span class="line"><span class="comment">     * - &#123; identifier: '剩余天数', operator: '&gt;=', value: 3  &#125; )</span></span><br><span class="line"><span class="comment">     * - ))</span></span><br><span class="line"><span class="comment">     * - )</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isBracketEnd = ((RIGHT_BRACKET === prev) &amp;&amp; next === <span class="literal">undefined</span>) || ((isValue(prev) || isObject(prev) || RIGHT_BRACKET === prev) &amp;&amp; (RIGHT_BRACKET === next));</span><br><span class="line">    <span class="keyword">if</span> (isBracketEnd) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * eg:</span></span><br><span class="line"><span class="comment">     * - &#123; identifier: '剩余天数', operator: '&gt;=', value: 3  &#125;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">const</span> isObjectEnd = isObject(prev) &amp;&amp; next === <span class="literal">undefined</span>;</span><br><span class="line">    <span class="keyword">if</span> (isObjectEnd) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  run(str) &#123;</span><br><span class="line">    <span class="keyword">this</span>.lex(str);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.parser();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> ParsingEngine;</span><br></pre></td></tr></table></figure>
+<h3><span id="工具方法">工具方法</span></h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Number</span>(value).toString() !== <span class="string">'NaN'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isString</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value !== <span class="string">'string'</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">const</span> firstChar = value.charAt(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">const</span> lastChar = value.charAt(value.length - <span class="number">1</span>);</span><br><span class="line">  <span class="keyword">return</span> (firstChar === <span class="string">'"'</span> &amp;&amp; lastChar === <span class="string">'"'</span>) || (firstChar === <span class="string">'\''</span> &amp;&amp; lastChar === <span class="string">'\''</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(value) === <span class="string">'[object Object]'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">isValue</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> isNumber(value) || isString(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">formatValue</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  value = value.replace(<span class="regexp">/"|'/g</span>, <span class="string">''</span>);</span><br><span class="line">  <span class="keyword">if</span> (value.indexOf(<span class="string">','</span>) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    value = value.split(<span class="string">','</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/js-lazyload/" data-toggle="tooltip" data-placement="top" title="基于JavaScript节流和防抖动实现的懒加载效果">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">功能分析</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">功能设计</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">词法分析</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">语法分析</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">功能实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">解析引擎</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">工具方法</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/clown-helang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 何浪 2022 
+                    <br>
+                    <!--Theme by <a href="http://beantech.org">BeanTech</a> -->
+                    <!--<span style="display: inline-block; margin: 0 5px;">-->
+                        <!--<i class="fa fa-heart"></i>-->
+                    <!--</span> -->
+                    <!--re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | -->
+                    <!--<iframe-->
+                        <!--style="margin-left: 2px; margin-bottom:-5px;"-->
+                        <!--frameborder="0" scrolling="0" width="91px" height="20px"-->
+                        <!--src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >-->
+                    <!--</iframe>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.helang.site/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.helang.site/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="何浪，WEB前端开发工程师，擅长React、React Native、Vue、HTML、CSS、JavaScript、微信小程序开发">
+    <meta name="keyword" content="何浪,WEB前端开发工程师,React,React Native,Vue,HTML,CSS,JavaScript,微信小程序开发,Nginx,Tomcat,思想是生命的奴隶,生命是时间的弄人">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <title>
+        
+          Centos下安装Nginx - 何浪 | 博客
+        
+    </title>
+
+    <link rel="canonical" href="http://www.helang.site/article/install-nginx/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Nginx" title="Nginx">Nginx</a>
+                            
+                        </div>
+                        <h1>Centos下安装Nginx</h1>
+                        <h2 class="subheading">安装教程</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2018-02-24
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">何浪</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="centos下安装-nginx">Centos下安装 Nginx</span></h1>
+<h2><span id="nginx安装命令">nginx安装命令</span></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 建立nginx的yum仓库</span><br><span class="line">rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"># 安装</span><br><span class="line"># 由于CENTOS7.2默认使用老版本的openssl(OpenSSL 1.0.1e) ,这个问题会导致yum nginx-1.12以上版本的时候会因为依赖libcrypto.so.10(OPENSSL_1.0.2)(64bit)的问题造成安装失败。解决办法：1、从http://rpm.pbone.net 搜索相关的RPM包下载（openssl-libs-1.0.2k-8.el7.x86_64.rpm openssl-1.0.2k-8.el7.x86_64.rpm）；2、以上两个文件下载到本地，然后安装yum localinstall openssl-libs-1.0.2k-8.el7.x86_64.rpm openssl-1.0.2k-8.el7.x86_64.rpm。安装好之后，就可以正常安装nginx了。</span><br><span class="line">sudo yum install nginx</span><br><span class="line"># 查看版本</span><br><span class="line">nginx -v</span><br></pre></td></tr></table></figure>
+<h2><span id="创建conf文件夹-logs文件夹">创建conf文件夹、logs文件夹</span></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/nginx</span><br><span class="line"># 创建 logs 及 conf 文件夹</span><br><span class="line">mkdir logs/ conf/</span><br></pre></td></tr></table></figure>
+<h2><span id="在-conf-文件夹下创建-nginxconf-文件">在 conf 文件夹下创建 nginx.conf 文件。</span></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">error_log /usr/share/nginx/logs/error.log;</span><br><span class="line"> </span><br><span class="line">events &#123;</span><br><span class="line">    # 每一个worker进程能并发处理（发起）的最大连接数，计算较为复杂，如果需要详细的配置规则请自行查询详细资料，默认可以配置大一些</span><br><span class="line">    worker_connections  10240;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">http &#123;</span><br><span class="line">    # 配置支持解析文件类型</span><br><span class="line">    include    mime.types;</span><br><span class="line">    # 配置允许跨域</span><br><span class="line">    add_header Access-Control-Allow-Origin *;</span><br><span class="line">    add_header Access-Control-Allow-Headers X-Requested-With;</span><br><span class="line">    add_header Access-Control-Allow-Methods GET,POST,OPTIONS;</span><br><span class="line"> </span><br><span class="line">    #配置H5页面访问端口和根路径映射</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        # 注意此处写的是部署的服务器真实地址</span><br><span class="line">        server_name  10.0.251.246;</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">            # 以H5构建的网页放的位置为准，推荐直接放在nginx的html文件夹下</span><br><span class="line">            root   /usr/share/nginx/html/StarfsaAppHTML;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    #配置api访问转发</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       10080;</span><br><span class="line">        # 注意此处写的是部署的服务器真实地址</span><br><span class="line">        server_name  10.0.251.246;</span><br><span class="line"> </span><br><span class="line">        location / &#123;</span><br><span class="line">            # 以实际部署的后台服务地址为准</span><br><span class="line">            proxy_pass https://192.168.32.34:8088;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="在-conf-文件夹内创建-mimetypes-文件">在 conf 文件夹内创建 mime.types 文件。</span></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">types &#123;</span><br><span class="line">    text/html                                        html htm shtml;</span><br><span class="line">    text/css                                         css;</span><br><span class="line">    text/xml                                         xml;</span><br><span class="line">    image/gif                                        gif;</span><br><span class="line">    image/jpeg                                       jpeg jpg;</span><br><span class="line">    application/javascript                           js;</span><br><span class="line">    application/atom+xml                             atom;</span><br><span class="line">    application/rss+xml                              rss;</span><br><span class="line"></span><br><span class="line">    text/mathml                                      mml;</span><br><span class="line">    text/plain                                       txt;</span><br><span class="line">    text/vnd.sun.j2me.app-descriptor                 jad;</span><br><span class="line">    text/vnd.wap.wml                                 wml;</span><br><span class="line">    text/x-component                                 htc;</span><br><span class="line"></span><br><span class="line">    image/png                                        png;</span><br><span class="line">    image/svg+xml                                    svg svgz;</span><br><span class="line">    image/tiff                                       tif tiff;</span><br><span class="line">    image/vnd.wap.wbmp                               wbmp;</span><br><span class="line">    image/webp                                       webp;</span><br><span class="line">    image/x-icon                                     ico;</span><br><span class="line">    image/x-jng                                      jng;</span><br><span class="line">    image/x-ms-bmp                                   bmp;</span><br><span class="line"></span><br><span class="line">    application/font-woff                            woff;</span><br><span class="line">    application/java-archive                         jar war ear;</span><br><span class="line">    application/json                                 json;</span><br><span class="line">    application/mac-binhex40                         hqx;</span><br><span class="line">    application/msword                               doc;</span><br><span class="line">    application/pdf                                  pdf;</span><br><span class="line">    application/postscript                           ps eps ai;</span><br><span class="line">    application/rtf                                  rtf;</span><br><span class="line">    application/vnd.apple.mpegurl                    m3u8;</span><br><span class="line">    application/vnd.google-earth.kml+xml             kml;</span><br><span class="line">    application/vnd.google-earth.kmz                 kmz;</span><br><span class="line">    application/vnd.ms-excel                         xls;</span><br><span class="line">    application/vnd.ms-fontobject                    eot;</span><br><span class="line">    application/vnd.ms-powerpoint                    ppt;</span><br><span class="line">    application/vnd.oasis.opendocument.graphics      odg;</span><br><span class="line">    application/vnd.oasis.opendocument.presentation  odp;</span><br><span class="line">    application/vnd.oasis.opendocument.spreadsheet   ods;</span><br><span class="line">    application/vnd.oasis.opendocument.text          odt;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.presentationml.presentation</span><br><span class="line">                                                     pptx;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</span><br><span class="line">                                                     xlsx;</span><br><span class="line">    application/vnd.openxmlformats-officedocument.wordprocessingml.document</span><br><span class="line">                                                     docx;</span><br><span class="line">    application/vnd.wap.wmlc                         wmlc;</span><br><span class="line">    application/x-7z-compressed                      7z;</span><br><span class="line">    application/x-cocoa                              cco;</span><br><span class="line">    application/x-java-archive-diff                  jardiff;</span><br><span class="line">    application/x-java-jnlp-file                     jnlp;</span><br><span class="line">    application/x-makeself                           run;</span><br><span class="line">    application/x-perl                               pl pm;</span><br><span class="line">    application/x-pilot                              prc pdb;</span><br><span class="line">    application/x-rar-compressed                     rar;</span><br><span class="line">    application/x-redhat-package-manager             rpm;</span><br><span class="line">    application/x-sea                                sea;</span><br><span class="line">    application/x-shockwave-flash                    swf;</span><br><span class="line">    application/x-stuffit                            sit;</span><br><span class="line">    application/x-tcl                                tcl tk;</span><br><span class="line">    application/x-x509-ca-cert                       der pem crt;</span><br><span class="line">    application/x-xpinstall                          xpi;</span><br><span class="line">    application/xhtml+xml                            xhtml;</span><br><span class="line">    application/xspf+xml                             xspf;</span><br><span class="line">    application/zip                                  zip;</span><br><span class="line"></span><br><span class="line">    application/octet-stream                         bin exe dll;</span><br><span class="line">    application/octet-stream                         deb;</span><br><span class="line">    application/octet-stream                         dmg;</span><br><span class="line">    application/octet-stream                         iso img;</span><br><span class="line">    application/octet-stream                         msi msp msm;</span><br><span class="line"></span><br><span class="line">    audio/midi                                       mid midi kar;</span><br><span class="line">    audio/mpeg                                       mp3;</span><br><span class="line">    audio/ogg                                        ogg;</span><br><span class="line">    audio/x-m4a                                      m4a;</span><br><span class="line">    audio/x-realaudio                                ra;</span><br><span class="line"></span><br><span class="line">    video/3gpp                                       3gpp 3gp;</span><br><span class="line">    video/mp2t                                       ts;</span><br><span class="line">    video/mp4                                        mp4;</span><br><span class="line">    video/mpeg                                       mpeg mpg;</span><br><span class="line">    video/quicktime                                  mov;</span><br><span class="line">    video/webm                                       webm;</span><br><span class="line">    video/x-flv                                      flv;</span><br><span class="line">    video/x-m4v                                      m4v;</span><br><span class="line">    video/x-mng                                      mng;</span><br><span class="line">    video/x-ms-asf                                   asx asf;</span><br><span class="line">    video/x-ms-wmv                                   wmv;</span><br><span class="line">    video/x-msvideo                                  avi;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="启动nginx">启动nginx</span></h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># nginx启动命令</span><br><span class="line">nginx -c /usr/share/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure>
+<p><strong>常用nginx命令</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># nginx 重启</span><br><span class="line">nginx -s reload</span><br><span class="line"># nginx 停止</span><br><span class="line">ps -ef | grep nginx      //查看nginx当前启动进程</span><br><span class="line">kill -9 （进程ID）        //当前nginx的进程ID</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/nginx-gzip/" data-toggle="tooltip" data-placement="top" title="Nginx启用压缩功能">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Centos下安装 Nginx</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">nginx安装命令</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">创建conf文件夹、logs文件夹</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">在 conf 文件夹下创建 nginx.conf 文件。</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">在 conf 文件夹内创建 mime.types 文件。</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">启动nginx</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Nginx" title="Nginx">Nginx</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/clown-helang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 何浪 2022 
+                    <br>
+                    <!--Theme by <a href="http://beantech.org">BeanTech</a> -->
+                    <!--<span style="display: inline-block; margin: 0 5px;">-->
+                        <!--<i class="fa fa-heart"></i>-->
+                    <!--</span> -->
+                    <!--re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | -->
+                    <!--<iframe-->
+                        <!--style="margin-left: 2px; margin-bottom:-5px;"-->
+                        <!--frameborder="0" scrolling="0" width="91px" height="20px"-->
+                        <!--src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >-->
+                    <!--</iframe>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.helang.site/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.helang.site/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

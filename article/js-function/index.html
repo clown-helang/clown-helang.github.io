@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="何浪，WEB前端开发工程师，擅长React、React Native、Vue、HTML、CSS、JavaScript、微信小程序开发">
+    <meta name="keyword" content="何浪,WEB前端开发工程师,React,React Native,Vue,HTML,CSS,JavaScript,微信小程序开发,Nginx,Tomcat,思想是生命的奴隶,生命是时间的弄人">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <title>
+        
+          JavaScript高级程序设计--Function类型 - 何浪 | 博客
+        
+    </title>
+
+    <link rel="canonical" href="http://www.helang.site/article/js-function/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                            
+                        </div>
+                        <h1>JavaScript高级程序设计--Function类型</h1>
+                        <h2 class="subheading">基础教程</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2018-05-14
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">何浪</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2><span id="function类型">Function类型</span></h2>
+<p>  <strong>函数实际上是对象。</strong> 每一个函数都是Function类型的实例，而且都与其他引用类型一样具有属性和方法。由于函数是对象，因此 <strong>函数名实际上也是一个指向函数对象的指针</strong>，不会与某个函数绑定。函数通常使用函数声明语法定义，如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function sum (num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  这与下面使用函数表达式定义函数的方式几乎相差无几。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var sum = function (num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  以上代码定义了变量 sum 并将其初始化为一个函数。有读者可能会注意到，function 关键字后面没有函数名。这是因为在使用函数表达式定义函数时，没有必要使用函数名 —— 通过变量 sum 即可以引用函数。另外，还要注意函数末尾有一个分号，就像声明其他变量时一样。</p>
+<p>  最后一种定义函数的方式是使用 Function 构造函数。Function 构造函数可以接收任意数量的参数，但最后一个参数始终都被看成是函数体，而前面的参数则枚举出了新函数的参数。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var sum = new Function(&quot;num1&quot;, &quot;num2&quot;, &quot;return num1 + num2&quot;);    // 不推荐</span><br></pre></td></tr></table></figure>
+<p>  从技术角度讲，这是一个函数表达式。但是，我们不推荐读者使用这种方法定义函授，因为这种语法会导致解析两次代码（第一次是解析常规 ECMAScript代码，第二次是解析传入构造函数中的字符串），从而影响性能。不过，这种语法对于理解“函数是对象，函数名是指针”的概念倒是非常直观的。</p>
+<h3><span id="没有重载">没有重载</span></h3>
+<p>  将函数名想象为指针，也有助于理解为什么 ECMAScript 中没有函数重载的概念。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function addSomeNumber(num) &#123;</span><br><span class="line">    return num + 100;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function addSomeNumber(num) &#123;</span><br><span class="line">    return num + 200;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = addSomeNumber(100);  //300</span><br></pre></td></tr></table></figure>
+<p>  显然，这个例子中声明了两个同名函数，而结果则是后面的函数覆盖了前面的函数。以上代码实际上与下面的代码没有什么区别。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var addSomeNumber = function (num) &#123;</span><br><span class="line">    return num + 100;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">addSomeNumber = function (num) &#123;</span><br><span class="line">    return num + 200;</span><br><span class="line">&#125;;</span><br><span class="line">var result = addSomeNumber(100); //300</span><br></pre></td></tr></table></figure>
+<p>  通过观察重写之后的代码，很容易看清楚到底是怎么回事儿 —— 在创建第二个函数时，实际上覆盖了引用第一个函数的变量addSomeNumber。</p>
+<h3><span id="函数声明与函数表达式">函数声明与函数表达式</span></h3>
+<p>  解析器在向执行环境中加载数据时，对函数声明和函数表达式并非一视同仁。解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(sum(10,10));</span><br><span class="line">function sum(num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  以上代码完全可以正常运行。因为在代码开始执行之前，解析器就已经通过一个名为<strong>函数声明提升</strong>（function declaration hoisting）的过程，读取并将函数声明添加到执行环境中。对代码求值时，JavaScript 引擎在第一遍会声明函数函数并将它们放到源代码树的顶部。所以，即使声明函数的代码在调用它的代码后面，JavaScript 引擎也能把函数声明提升到顶部。如果像下面例子所示的，把上面的函数声明改为等价的函数表达式，就会在执行期间导致错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(sum(10,10));  //Uncaught TypeError: sum is not a function</span><br><span class="line">var sum = function(num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>  以上代码之所以会在运行期间产生错误，原因在于函数位于一个初始化语句中，而不是一个函数声明。换句话说，在执行到函数所在的语句之前，变量 sum 中不会保存有对函数的引用；而且，由于第一行代码就会导致错误，实际上也不会执行到下一行。</p>
+<p>  除了<strong>什么时候</strong>可以通过变量访问函数这一点区别之外，函数声明与函数表达式的语法其实是等价的。</p>
+<h3><span id="作为值的函数">作为值的函数</span></h3>
+<p>  因为 ECMAScript 中的函数名本身就是变量，所以函数也可以作为值来使用。也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回。来看一看下面的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function callSomeFunction(someFunction, someArgument)&#123;</span><br><span class="line">    return someFunction(someArgument);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  这个函数接收两个参数。第一个参数应该是第一个函数，第二个参数应该是要传递给该函数的一个值。然后，就可以像下面的例子一样传递函数了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function add10(num)&#123;</span><br><span class="line">    return num + 10;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result1 = callSomeFunction(add10, 10);</span><br><span class="line">alert(result1);   //20</span><br><span class="line"></span><br><span class="line">function getGreetiong(name)&#123;</span><br><span class="line">    return &quot;Hello, &quot; + name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result2 = callSomeFunction(getGreeting, &quot;HeLang&quot;);</span><br><span class="line">alert(result2);   //&quot;Hello, HeLang&quot;</span><br></pre></td></tr></table></figure>
+<p>  这里的 callSomeFunction()函数是通用的，即无论第一个参数中传递进来的是什么函数，他都会返回执行第一个参数后的结果。</p>
+<p>  当然，可以从第一个函数中返回另一个函数，而且这也是极为有用的一种技术。例如，假设有一个对象数组，我们想要根据某个对象属性对数组进行排序。而传递给数组 sort() 方法的比较函数要接受两个参数，即要比较的值。可是，我们需要一种方式来指明按照那个属性来排序。要解决这个问题，可以定义一个函数，它接受一个属性名，然后根据这个属性名来创建一个比较函数，下面就是这个函数的定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function createComparisonFunction(propertyName) &#123;</span><br><span class="line"></span><br><span class="line">    return function(object1, object2)&#123;</span><br><span class="line">        var value1 = object1[propertyName];</span><br><span class="line">        var value2 = object2[propertyName];</span><br><span class="line">        </span><br><span class="line">        if (value1 &lt; value2)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125; else if (value1 &gt; value2)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数看起来有点复杂，但实际上无非就是在一个函数中嵌套了另一个函数，而且内部函数前面加了一个return操作符。在内部函数接收到 propertyName 参数后，它会使用方括号表示法来取得给定属性的值。取得了想要的属性值之后，定义比较函数就非常简单了。上面这个函数可以像在下面例子中这样使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var data = [&#123;name: &quot;Zachary&quot;, age: 28&#125;, &#123;name: &quot;Nicholas&quot;, age: 29&#125;];</span><br><span class="line"></span><br><span class="line">data.sort(createComparisonFunction(&quot;name&quot;));</span><br><span class="line">alert(data[0].name); //Nicholas</span><br><span class="line"></span><br><span class="line">data.sort(createComparisonFunction(&quot;age&quot;));</span><br><span class="line">alert(data[0].name); //Zachary</span><br></pre></td></tr></table></figure>
+<p>这里，我们创建了一个包含两个对象的数组data。其中，每个对象都包含 name 属性和一个 age 属性。在默认情况下，sort（）方法会调用每个对象的 toString（）方法以确定它们的次序；但得到的结果往往并不符合人类的思维习惯。因此，我们调用 createComparisonFunction(“name”)方法创建了一个比较函数，以便按照每个对象的 name 属性值进行排序。而结果排在前面的第一项是name<br>
+为&quot;Nicholas&quot;，age 是29 的对象。然后，我们又使用了createComparisonFunction(“age”)返回<br>
+的比较函数，这次是按照对象的age 属性排序。得到的结果是name 值为&quot;Zachary&quot;，age 值是28 的<br>
+对象排在了第一位。</p>
+<h3><span id="函数内部属性">函数内部属性</span></h3>
+<p>  在函数内部，有两个特殊的对象：arguments 和 this。其中，arguments是一个类数组对象，包含着传入函数中的所有参数。虽然 arguments 的主要用途是保存函数参数，但这个对象还有一个名叫 callee 的属性，该属性是一个指针，指向拥有这个 arguments 对象的函数。请看下面这个非常经典的阶乘函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function factorial(num)&#123;</span><br><span class="line">    if(num &lt;= 1) &#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return num * factorial(num - 1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  定义阶乘函数一般都要用到递归算法；如上面代码所示，在函数有名字，而且名字以后也不会变的情况下，这样定义没有问题。单问题是这个函数的执行与函数名 factorial 紧紧耦合在了一起。为了消除这种紧密耦合的现象，可以像下面这样使用 arguments.cellee。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function factorial(num)&#123;</span><br><span class="line">    if(num &lt;= 1)&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return num * arguments.callee(num - 1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  在这个重写后的 factorial（）函数的函数体内，没有再引用函数名factorial。这样，无论引用函数时使用的是什么名字，都可以保证正常完成递归调用。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var trueFactorial = factorial;</span><br><span class="line">factorial = function()&#123;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(trueFactorial(5));   //120</span><br><span class="line">alert(factorial(5));       //0</span><br></pre></td></tr></table></figure>
+<p>  在此，变量trueFactorial 获得了factorial 的值，实际上是在另一个位置上保存了一个函数<br>
+的指针。然后，我们又将一个简单地返回0 的函数赋值给factorial 变量。如果像原来的factorial()<br>
+那样不使用arguments.callee，调用trueFactorial()就会返回0。可是，在解除了函数体内的代<br>
+码与函数名的耦合状态之后，trueFactorial()仍然能够正常地计算阶乘；至于factorial()，它现<br>
+在只是一个返回0 的函数。</p>
+<p>  函数内部的另一个特殊对象是this,this引用的是函数据以执行的环境对象 —— 或者也可以说是 this 值（当在网页的全局作用域中调用函数时，this对象引用的就是window）。来看下面的例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.color = &apos;red&apos;;</span><br><span class="line">var o = &#123; color:&apos;blue&apos; &#125;;</span><br><span class="line"></span><br><span class="line">function sayColor()&#123;</span><br><span class="line">    alert(this.color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello();     //&apos;red&apos;</span><br><span class="line"></span><br><span class="line">o.sayColor = sayColor;</span><br><span class="line">o.sayColor();  //&quot;blue&quot;</span><br></pre></td></tr></table></figure>
+<p>  上面这个函数sayColor()是在全局作用域中定义的，它引用this对象，由于在调用函数之前 this 的值并不确定，因此 this 可能会在代码执行过程中引用不同的对象。当在全局作用域中嗲用sayColor（）时，this 应用的是全局对象 window；换句话说，对 this.color 求值会转换成对 window.color 求值，于是结果就返回了 “red”。而把这个函数赋给对象 o 并调用 o.sayColor()时，this 引用的是对象 o，因此对 this.color 求值会转换成对 o.color 求值，结果就返回了 “blue”。</p>
+<p>  ECMAScript 5 也规范化了另一个函数对象的属性：caller。除了Opera 的早期版本不支持，其他<br>
+浏览器都支持这个ECMAScript 3 并没有定义的属性。这个属性中保存着调用当前函数的函数的引用。如果是在全局作用域中调用调用当前函数，他的值为null。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function outer()&#123;</span><br><span class="line">    inner();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function inner()&#123;</span><br><span class="line">    alert(inner.caller)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outer();</span><br></pre></td></tr></table></figure>
+<p>  以上代码会导致警告框中显示outer()函数的源代码。因为outer()调用了inter()，所以<br>
+inner.caller 就指向outer()。为了实现更松散的耦合，也可以通过arguments.callee.caller<br>
+来访问相同的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function outer()&#123;</span><br><span class="line">    inner();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function inner()&#123;</span><br><span class="line">    alert(arguments.callee,caller);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outer();</span><br></pre></td></tr></table></figure>
+<p>  IE、Firefox、Chrome 和Safari 的所有版本以及Opera 9.6 都支持caller 属性。<br>
+  当函数在严格模式下运行时，访问arguments.callee 会导致错误。ECMAScript 5 还定义了<br>
+arguments.caller 属性，但在严格模式下访问它也会导致错误，而在非严格模式下这个属性始终是<br>
+undefined。定义这个属性是为了分清arguments.caller 和函数的caller 属性。以上变化都是为<br>
+了加强这门语言的安全性，这样第三方代码就不能在相同的环境里窥视其他代码了。<br>
+  严格模式还有一个限制：不能为函数的caller 属性赋值，否则会导致错误。<br>
+图</p>
+<h3><span id="函数属性和方法">函数属性和方法</span></h3>
+<p>  前面曾经提到过，ECMAScript 中的函数是对象，因此函数也有属性和方法。每个函数都包含两个属性：length 和 prototype。其中，length 属性标识函数希望接收的命名参数的个数，如下面的例子所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function sayName(name)&#123;</span><br><span class="line">    alert(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sum(num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function sayHi()&#123;</span><br><span class="line">    alert(&quot;hi&quot;);</span><br><span class="line">&#125;</span><br><span class="line">alert(sayName.length);        //1</span><br><span class="line">alert(sum.length);            //2</span><br><span class="line">alert(sayHi.length);          //0</span><br></pre></td></tr></table></figure>
+<p>  以上代码定义了3 个函数，但每个函数接收的命名参数个数不同。首先，sayName()函数定义了一<br>
+个参数，因此其length 属性的值为1。类似地，sum()函数定义了两个参数，结果其length 属性中<br>
+保存的值为2。而sayHi()没有命名参数，所以其length 值为0。<br>
+  对于 ECMAScript 中的引用类型而言，prototype 是保存他们所有实例方法的真正所在。换句话说，诸如 toString() 和 valueOf() 等方法实际上都保存在 prototype 名下，只不过是通过各自对象的实例访问罢了。在创建自定义引用类型以及实现继承时，prototype 属性的作用是极为重要的。在 ECMAScript5 中，prototype属性是不可枚举的，因此使用 for-in 无法发现。<br>
+  每个函数都包含两个非继承而来的方法：apply() 和 call()。这两个方法的用途都是在特定的作用域中调用函数，实际上等于设置函数体内 this 对象的值。首先，apply()方法接收两个参数：一个是在其中运行函数的作用域，另一个是参数数组。其中，第二个参数可以是Array的实例，也可以是 arguments 对象。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function sum(num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function callSum1(num1, num2)&#123;</span><br><span class="line">    return sum.apply(this, arguments);       传入 arguments 对象</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function callSum2(num1, num2)&#123;</span><br><span class="line">    return sum.apply(this, [num1,num2]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(callSum1(10,10));             //20</span><br><span class="line">alert(callSum2(10,10));             //20</span><br></pre></td></tr></table></figure>
+<p>  call()方法与apply方法的作用相同，它们的区别仅在于接受参数的方式不同。对于 call() 方法而言，第一个参数是this值没有变化，变化的是其余参数都直接传递给函数。换句话说，在使用call()方法是，传递给函数的参数必须逐个列举出来，如下面的例子所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function sum(num1, num2)&#123;</span><br><span class="line">    return num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function callSum(num1, num2)&#123;</span><br><span class="line">    return sum.call(this, num1, num2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(callSum(10,10)); //20</span><br></pre></td></tr></table></figure>
+<p>  在使用call()方法的情况下，callSum()必须明确的传入每一个参数。结果与使用apply()没有什么不同。至于是使用apply()还是call(),完全取决于你采取哪种给函数传递参数的方式最方便。如果你打算直接传入 arguments 对象，或者包含函数中线接收到的也是一个数组，那么使用apply()肯定更方便；否则，选择call()可能更合适。（在不给函数传递参数的情况下，使用那个方法都无所谓。）<br>
+  事实上，传递参数并非apply()和call()真正的用武之地；他们真正强大的地方是能够扩充函数赖以运行的作用域。下面来看一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">window.color = &quot;red&quot;;</span><br><span class="line">var o = &#123; color: &quot;blue&quot; &#125;;</span><br><span class="line"></span><br><span class="line">function sayColor()&#123;</span><br><span class="line">    alert(this.color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayColor();</span><br><span class="line"></span><br><span class="line">sayColor.call(this);     //red</span><br><span class="line">sayColor.call(window);   //red</span><br><span class="line">sayColor.call(o);        //blue</span><br></pre></td></tr></table></figure>
+<p>  使用call()（或apply()）来扩充作用域的最大好处，就是对象不需要与方法有任何耦合关系。<br>
+在前面例子的第一个版本中，我们是先将sayColor()函数放到了对象o 中，然后再通过o 来调用它的；<br>
+而在这里重写的例子中，就不需要先前那个多余的步骤了。</p>
+<p>  ECMAScript 5 还定义了一个方法：bind()。这个方法会创建一个函数的实例，其this 值会被绑<br>
+定到传给bind()函数的值。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">window.color = &quot;red&quot;;</span><br><span class="line">var o = &#123; color: &quot;blue&quot; &#125;;</span><br><span class="line"></span><br><span class="line">function sayColor()&#123;</span><br><span class="line">    alert(this.color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var objectSayColor = sayColor.bind(o);</span><br><span class="line">objectSayColor(); //blue</span><br></pre></td></tr></table></figure>
+<p>  在这里，sayColor()调用bind()并传入对象o，创建了objectSayColor()函数。object-<br>
+SayColor()函数的this 值等于o，因此即使是在全局作用域中调用这个函数，也会看到&quot;blue&quot;。这<br>
+种技巧的优点请参考第22 章。</p>
+<p>  每个函数继承的toLocaleString()和toString()方法始终都返回函数的代码。返回代码的格<br>
+式则因浏览器而异——有的返回的代码与源代码中的函数代码一样，而有的则返回函数代码的内部表<br>
+示，即由解析器删除了注释并对某些代码作了改动后的代码。由于存在这些差异，我们无法根据这两个<br>
+方法返回的结果来实现任何重要功能；不过，这些信息在调试代码时倒是很有用。另外一个继承的<br>
+valueOf()方法同样也只返回函数代码。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/js-object/" data-toggle="tooltip" data-placement="top" title="JavaScript高级程序设计--理解与创建对象">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/nginx-cros/" data-toggle="tooltip" data-placement="top" title="Nginx配置代理解决跨域问题">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Function类型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">没有重载</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">函数声明与函数表达式</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">作为值的函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">函数内部属性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">函数属性和方法</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/clown-helang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 何浪 2022 
+                    <br>
+                    <!--Theme by <a href="http://beantech.org">BeanTech</a> -->
+                    <!--<span style="display: inline-block; margin: 0 5px;">-->
+                        <!--<i class="fa fa-heart"></i>-->
+                    <!--</span> -->
+                    <!--re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | -->
+                    <!--<iframe-->
+                        <!--style="margin-left: 2px; margin-bottom:-5px;"-->
+                        <!--frameborder="0" scrolling="0" width="91px" height="20px"-->
+                        <!--src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >-->
+                    <!--</iframe>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.helang.site/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.helang.site/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
