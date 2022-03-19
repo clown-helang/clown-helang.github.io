@@ -28,11 +28,11 @@
     </script>
     <title>
         
-          Windows环境下nvm的安装与使用 - 何浪 | 博客
+          素数个数统计 - 何浪 | 博客
         
     </title>
 
-    <link rel="canonical" href="http://www.helang.site/article/node-nvm/">
+    <link rel="canonical" href="http://www.helang.site/article/leetcode-prime/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -100,14 +100,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#NodeJS" title="NodeJS">NodeJS</a>
+                              <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
                             
                         </div>
-                        <h1>Windows环境下nvm的安装与使用</h1>
-                        <h2 class="subheading">日常工具</h2>
+                        <h1>素数个数统计</h1>
+                        <h2 class="subheading">算法练习</h2>
                         <span class="meta">
                             Posted by 何浪 on
-                            2022-03-14
+                            2022-03-19
                         </span>
                     </div>
                 
@@ -224,41 +224,17 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="简介">简介</span></h2>
-<p><code>nvm</code>允许你通过命令快速安装和使用不同版本的<code>node</code>。</p>
-<p><strong>例如</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use 16.9.1</span><br><span class="line">Now using node v16.9.1 (npm v7.21.1)</span><br><span class="line">$ node -v</span><br><span class="line">v16.9.1</span><br><span class="line">$ nvm use 14.18.0</span><br><span class="line">Now using node v14.18.0 (npm v6.14.15)</span><br><span class="line">$ node -v</span><br><span class="line">v14.18.0</span><br><span class="line">$ nvm install 12.22.6</span><br><span class="line">Now using node v12.22.6 (npm v6.14.5)</span><br><span class="line">$ node -v</span><br><span class="line">v12.22.6</span><br></pre></td></tr></table></figure>
-<p>就是这么简单。</p>
-<h2><span id="关于">关于</span></h2>
-<p><code>nvm</code> 是<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js</a>的版本管理器，其主要功能是可以在本地安装多个版本的 nodejs，且可切换版本。如果读者使用的是 MacOS 或 Linux 可以参考 <a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm-sh/<em>nvm</em></a> 项目，如果是 windows 的话则参考 <a href="https://github.com/coreybutler/nvm-windows" target="_blank" rel="noopener">coreybutler/<em>nvm</em>-windows</a> 项目。由于笔者本人使用 windows，所以这里下载安装以后者为例。</p>
-<h2><span id="下载与安装">下载与安装</span></h2>
-<p>下载地址：<a href="https://github.com/coreybutler/nvm-windows/releases/tag/1.1.9" target="_blank" rel="noopener">V1.1.9</a></p>
-<img src="/article/node-nvm/image-20220314224225497.png" title="This is an download page image">
-<p>下载后解压并执行<code>nvm-setup.exe</code></p>
-<img src="/article/node-nvm/image-20220314224514959.png" title="This is an install image">
-<img src="/article/node-nvm/image-20220314224551906.png" title="This is an install image">
-<p>一路<code>next</code>即可。</p>
-<h2><span id="环境变量配置">环境变量配置</span></h2>
-<p>正常情况下通过<code>nvm-setup.exe</code>安装成功后即可使用，如果出现<code>nvm</code>命令找不到情况，需要配置环境变量。可参考下图配置：</p>
-<img src="/article/node-nvm/image-20220314225257680.png" title="This is an image">
-<img src="/article/node-nvm/image-20220314225047676.png" title="This is an image">
-<img src="/article/node-nvm/image-20220314225149693.png" title="This is an image">
-<h2><span id="nvm-源配置">NVM 源配置</span></h2>
-<p>找到<code>nvm</code>安装目录，打开<code>settings.txt</code>文件，如果没有可以自己创建一个。</p>
-<img src="/article/node-nvm/image-20220314225733651.png" title="This is an image">
-<p>然后打开并编辑：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root: D:\FE\nvm</span><br><span class="line">path: C:\Program Files\nodejs</span><br><span class="line">arch: 64</span><br><span class="line">proxy: none</span><br><span class="line">node_mirror: https://npm.taobao.org/mirrors/node/</span><br><span class="line">npm_mirror: https://npm.taobao.org/mirrors/npm/</span><br></pre></td></tr></table></figure>
-<h2><span id="验证">验证</span></h2>
-<p>打开终端工具，输入：<code>nvm</code></p>
-<img src="/article/node-nvm/image-20220314230129171.png" title="This is an image">
-<p>如果出现如上图所示内容，那么恭喜你安装成功了。</p>
-<h2><span id="常用命令">常用命令</span></h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出所有可以安装的node版本号</span></span><br><span class="line">nvm list available</span><br><span class="line"><span class="comment"># 安装指定版本号的node</span></span><br><span class="line">nvm install xxx</span><br><span class="line"><span class="comment"># 列出所有已经安装的node版本</span></span><br><span class="line">nvm list/ls</span><br><span class="line"><span class="comment"># 切换node的版本</span></span><br><span class="line">nvm use	xxx</span><br></pre></td></tr></table></figure>
-<h2><span id="参考文章">参考文章</span></h2>
-<ul>
-<li><a href="https://www.cnblogs.com/oneclue/p/14915977.html" target="_blank" rel="noopener">https://www.cnblogs.com/oneclue/p/14915977.html</a></li>
-<li><a href="https://github.com/nvm-sh/nvm/blob/master/README.md" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm/blob/master/README.md</a></li>
-</ul>
+                <h2><span id="题目">题目</span></h2>
+<p>统计 N 以内的素数个数（素数：只能被 1 和自身整除的自然数，0、1 除外）</p>
+<h2><span id="方法一暴力解法">方法一：暴力解法</span></h2>
+<p>再不考虑时间复杂度的情况下，可以使用逐一判断的方式暴力计算素数个数，具体代码如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 计数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">    result += isPrime(i) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 判断是否是素数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPrime</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i * i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (n % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="方法二埃氏筛选">方法二：埃氏筛选</span></h2>
+<p>统计素数的个数，换个角度思考，其实也就是统计合数（非素数）的个数。所以可以将代码优化如下：</p>
+<blockquote>
+<p>合数：合数就是除了 1 和本身之外至少还有一个约数的数字。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> isPrime = <span class="keyword">new</span> <span class="built_in">Array</span>(n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isPrime[i]) &#123;</span><br><span class="line">      count++;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = i * i; j &lt; n; j += i) &#123;</span><br><span class="line">        isPrime[j] = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
                 
 
@@ -266,13 +242,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/leetcode-prime/" data-toggle="tooltip" data-placement="top" title="素数个数统计">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/leetcode-reverse-list/" data-toggle="tooltip" data-placement="top" title="反转链表">Next Post &rarr;</a>
+                            <a href="/article/node-nvm/" data-toggle="tooltip" data-placement="top" title="Windows环境下nvm的安装与使用">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -313,7 +285,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">简介</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">关于</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">下载与安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">环境变量配置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">NVM 源配置</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">验证</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">常用命令</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">参考文章</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">方法一：暴力解法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">方法二：埃氏筛选</span></a></li></ol>
         
         </div>
       </aside>
@@ -333,7 +305,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#NodeJS" title="NodeJS">NodeJS</a>
+                          <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
                         
                     </div>
                 </section>
