@@ -28,11 +28,11 @@
     </script>
     <title>
         
-          素数个数统计 - 何浪 | 博客
+          反转链表 - 何浪 | 博客
         
     </title>
 
-    <link rel="canonical" href="http://www.helang.site/article/leetcode-prime/">
+    <link rel="canonical" href="http://www.helang.site/article/arithmetic-reverse-list/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -100,14 +100,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                              <a class="tag" href="/tags/#Arithmetic" title="Arithmetic">Arithmetic</a>
                             
                         </div>
-                        <h1>素数个数统计</h1>
+                        <h1>反转链表</h1>
                         <h2 class="subheading">算法练习</h2>
                         <span class="meta">
                             Posted by 何浪 on
-                            2022-03-19
+                            2022-03-13
                         </span>
                     </div>
                 
@@ -225,16 +225,18 @@
                 post-container">
 
                 <h2><span id="题目">题目</span></h2>
-<p>统计 N 以内的素数个数（素数：只能被 1 和自身整除的自然数，0、1 除外）</p>
-<h2><span id="方法一暴力解法">方法一：暴力解法</span></h2>
-<p>再不考虑时间复杂度的情况下，可以使用逐一判断的方式暴力计算素数个数，具体代码如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 计数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">    result += isPrime(i) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 判断是否是素数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPrime</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i * i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (n % i == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="方法二埃氏筛选">方法二：埃氏筛选</span></h2>
-<p>统计素数的个数，换个角度思考，其实也就是统计合数（非素数）的个数。所以可以将代码优化如下：</p>
-<blockquote>
-<p>合数：合数就是除了 1 和本身之外至少还有一个约数的数字。</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">count</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> isPrime = <span class="keyword">new</span> <span class="built_in">Array</span>(n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isPrime[i]) &#123;</span><br><span class="line">      count++;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = i * i; j &lt; n; j += i) &#123;</span><br><span class="line">        isPrime[j] = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将链表的顺序翻转过来</p>
+<p>例：</p>
+<ul>
+<li>输入：1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</li>
+<li>输出：5 -&gt; 4 -&gt; 3 -&gt; 2 -&gt; 1</li>
+</ul>
+<p>使用两种方式解题</p>
+<h2><span id="解题">解题</span></h2>
+<h3><span id="方法一迭代">方法一：迭代</span></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> prev = <span class="literal">null</span>,</span><br><span class="line">    next;</span><br><span class="line">  <span class="keyword">let</span> curr = head;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (curr) &#123;</span><br><span class="line">    next = curr.next;</span><br><span class="line">    curr.next = prev;</span><br><span class="line">    prev = curr;</span><br><span class="line">    curr = next;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> prev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3><span id="方法二递归">方法二：递归</span></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reverse</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="literal">null</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">recursion</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node === <span class="literal">null</span> || node.next === <span class="literal">null</span>) &#123;</span><br><span class="line">      result = node;</span><br><span class="line">      <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> prevNode = recursion(node.next);</span><br><span class="line"></span><br><span class="line">    prevNode.next = node;</span><br><span class="line">    node.next = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">  &#125;</span><br><span class="line">  recursion(head);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
                 
 
@@ -242,9 +244,13 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/article/node-nvm/" data-toggle="tooltip" data-placement="top" title="Windows环境下nvm的安装与使用">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
-                            <a href="/article/node-nvm/" data-toggle="tooltip" data-placement="top" title="Windows环境下nvm的安装与使用">Next Post &rarr;</a>
+                            <a href="/article/parsing-engine/" data-toggle="tooltip" data-placement="top" title="JS类SQL语句解析引擎">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -285,7 +291,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">方法一：暴力解法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">方法二：埃氏筛选</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">解题</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">方法一：迭代</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">方法二：递归</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -305,7 +311,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#LeetCode" title="LeetCode">LeetCode</a>
+                          <a class="tag" href="/tags/#Arithmetic" title="Arithmetic">Arithmetic</a>
                         
                     </div>
                 </section>

@@ -210,11 +210,11 @@
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 
+                    <a href="#Arithmetic" title="Arithmetic" rel="2">Arithmetic</a>
+                
                     <a href="#Nginx" title="Nginx" rel="4">Nginx</a>
                 
                     <a href="#Javascript" title="Javascript" rel="6">Javascript</a>
-                
-                    <a href="#LeetCode" title="LeetCode" rel="2">LeetCode</a>
                 
                     <a href="#NodeJS" title="NodeJS" rel="1">NodeJS</a>
                 
@@ -224,6 +224,51 @@
 
             <!-- 标签列表 -->
 
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Arithmetic">
+                    <span class="tag-text">Arithmetic</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/arithmetic-prime/">
+                        <h2 class="post-title">
+                            素数个数统计
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                算法练习
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/article/arithmetic-reverse-list/">
+                        <h2 class="post-title">
+                            反转链表
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                算法练习
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Nginx">
@@ -254,9 +299,9 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/nginx-cros/">
+                     <a href="/article/nginx-cache/">
                         <h2 class="post-title">
-                            Nginx配置代理解决跨域问题
+                            Nginx启用缓存功能
                         </h2>
                         
                             <h3 class="post-subtitle">
@@ -273,9 +318,9 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/nginx-cache/">
+                     <a href="/article/nginx-cros/">
                         <h2 class="post-title">
-                            Nginx启用缓存功能
+                            Nginx配置代理解决跨域问题
                         </h2>
                         
                             <h3 class="post-subtitle">
@@ -318,13 +363,13 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/js-function/">
+                     <a href="/article/js-utils/">
                         <h2 class="post-title">
-                            JavaScript高级程序设计--Function类型
+                            Javascript常用工具方法
                         </h2>
                         
                             <h3 class="post-subtitle">
-                                基础教程
+                                日常工具
                             </h3>
                         
                     </a>
@@ -375,6 +420,25 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
+                     <a href="/article/js-function/">
+                        <h2 class="post-title">
+                            JavaScript高级程序设计--Function类型
+                        </h2>
+                        
+                            <h3 class="post-subtitle">
+                                基础教程
+                            </h3>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
                      <a href="/article/js-object/">
                         <h2 class="post-title">
                             JavaScript高级程序设计--理解与创建对象
@@ -394,25 +458,6 @@
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/article/js-utils/">
-                        <h2 class="post-title">
-                            Javascript常用工具方法
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                日常工具
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
                      <a href="/article/parsing-engine/">
                         <h2 class="post-title">
                             JS类SQL语句解析引擎
@@ -420,51 +465,6 @@
                         
                             <h3 class="post-subtitle">
                                 JS解析引擎概念应用
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="LeetCode">
-                    <span class="tag-text">LeetCode</span>
-                </span>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/leetcode-reverse-list/">
-                        <h2 class="post-title">
-                            反转链表
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                算法练习
-                            </h3>
-                        
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </div>
-                <hr>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <div class="post-preview">
-                     <a href="/article/leetcode-prime/">
-                        <h2 class="post-title">
-                            素数个数统计
-                        </h2>
-                        
-                            <h3 class="post-subtitle">
-                                算法练习
                             </h3>
                         
                     </a>
