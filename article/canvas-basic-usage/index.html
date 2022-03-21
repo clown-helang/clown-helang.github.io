@@ -28,11 +28,11 @@
     </script>
     <title>
         
-          删除数组中的重复项 - 何浪 | 博客
+          Canvas的基本用法 - 何浪 | 博客
         
     </title>
 
-    <link rel="canonical" href="http://www.helang.site/article/arithmetic-double-pointer/">
+    <link rel="canonical" href="http://www.helang.site/article/canvas-basic-usage/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -100,14 +100,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Arithmetic" title="Arithmetic">Arithmetic</a>
+                              <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
                             
                         </div>
-                        <h1>删除数组中的重复项</h1>
-                        <h2 class="subheading">算法练习</h2>
+                        <h1>Canvas的基本用法</h1>
+                        <h2 class="subheading">Canvas系列</h2>
                         <span class="meta">
                             Posted by 何浪 on
-                            2022-03-20
+                            2022-03-21
                         </span>
                     </div>
                 
@@ -224,15 +224,33 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2><span id="题目">题目</span></h2>
-<p>一个有序数组 nums，原地删除重复出现的元素，使每个元素只出现一次，返回删除后数组的新长度。不能使用额外的数组空间，必须在原地的修改输入数组并在使用 O(1)额外空间的条件下完成。</p>
-<p>例：</p>
-<p>​ 输入：[0,1,2,2,3,3,4]</p>
-<p>​ 输出：5</p>
-<h2><span id="解法双指针算法">解法：双指针算法</span></h2>
-<p>数组完成排序后，我们可以放置两个指针<code>i</code>和<code>j</code>，其中<code>i</code>使慢指针，而<code>j</code>是快指针。只要<code>nums[i]=nums[j]</code>，我们就增加<code>j</code>以跳过重复项。</p>
-<p>当遇到<code>nums[j]!= nums[i]</code>时，跳过重复项的运行已经结束，必须把<code>nums[j]</code>的值复制到<code>nums[i+1]</code>。然后递增<code>i</code>，接着将再次重复相同的过程，直到<code>j</code>到达数组的末尾为止。代码如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeDuplicates</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!nums.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt; nums.length; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (nums[j] !== nums[i]) &#123;</span><br><span class="line">      i++;</span><br><span class="line">      nums[i] = nums[j];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <h1><span id="canvas-教程">Canvas 教程</span></h1>
+<p><code>&lt;canvas&gt;</code>是一个可以使用<code>JavaScript</code>脚本来绘制图形的<code>HTML</code>元素。例如，它可以用于绘制图表、制作图片构图或者制作简单的动画。</p>
+<p><code>&lt;canvas&gt;</code>最早由 Apple 引入<code>Webkit</code>，用于 Mac OS X 的 Dashboard，随后被各个浏览器实现。如今，所有主流的浏览器都支持它。Canvas 的默认大小为 300 像素 ×150 像素（宽 × 高，像素的单位是 px）。但是，可以使用 HTML 的高度和宽度属性来定义 Canvas 的尺寸。为了在 Canvas 上绘制图形，我们使用一个 Javascript 上下文对象，它能动态创建图像（creates graphics on the fly）。</p>
+<h2><span id="基础用法">基础用法</span></h2>
+<h3><span id="ltcanvasgt元素"><code>&lt;canvas&gt;</code>元素</span></h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=<span class="string">"tutorial"</span> width=<span class="string">"150"</span> height=<span class="string">"150"</span>&gt;&lt;<span class="regexp">/canvas&gt;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>canvas</code>和<code>img</code>元素很相像，不同是它并没有<code>src</code>和<code>alt</code>属性，且<code>&lt;/canvas&gt;</code>标签不可省略，如果不存在，则文档的其余部分会被认为是替代内容，将不会显示出来。。</li>
+<li><code>canvas</code>标签只有两个属性：<code>width</code>和<code>height</code>。可通过 DOM 实例修改。默认值为：300 像素*150 像素。</li>
+<li>可以使用<code>CSS</code>来定义大小（不推荐使用），但在绘制时图像会伸缩以适应它的框架尺寸：如果<code>CSS</code>的尺寸与初始画布的比例不一致，它会出现扭曲。</li>
+<li><code>margin</code> <code>border</code> <code>background</code>等属性，不会影响<code>canvas</code>中的实际图像。默认<code>canvas</code>状态为完全透明。</li>
+</ol>
+<h2><span id="替换内容">替换内容</span></h2>
+<p>对于较老的浏览器（尤其是 IE9 之前的 IE 浏览器）可以通过设置替换内容。用于优雅降级兼容处理。举个栗子 🌰，我们可以提供对<code>canvas</code>内容的文字描述或者是提供动态生成内容相对应的静态图片，如下所示：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"stockGraph"</span> <span class="attr">width</span>=<span class="string">"150"</span> <span class="attr">height</span>=<span class="string">"150"</span>&gt;</span></span><br><span class="line">  current stock price: $3.15 +0.15</span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"clock"</span> <span class="attr">width</span>=<span class="string">"150"</span> <span class="attr">height</span>=<span class="string">"150"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"images/clock.png"</span> <span class="attr">width</span>=<span class="string">"150"</span> <span class="attr">height</span>=<span class="string">"150"</span> <span class="attr">alt</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2><span id="渲染上下文the-rendering-context">渲染上下文（the rendering context）</span></h2>
+<p><code>canvas</code>元素上有一个<code>getContext()</code>的方法，这个方法是用来获得渲染上下文和它的绘画功能。方法接受一个参数，即上下文的类型。对于 2D 图像而言，可以使用<code>CanvasRenderingContext2D</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'tutorial'</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>); <span class="comment">// '2d'作为参数获取到的即为：CanvasRenderingContext2D 实例</span></span><br></pre></td></tr></table></figure>
+<p>有了上下文，您就可以绘制任何想要的东西。</p>
+<h2><span id="检查支持性">检查支持性</span></h2>
+<p>替换内容是用于在不支持<code>canvas</code>标签的浏览器中展示的。通过简单的测试<code>getContext()方法的存在，脚本可以检查编程支持性</code>。上面的代码片段现在变成了这个样子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'tutorial'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  <span class="comment">// drawing code here</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// canvas-unsupported code here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="一个简单例子">一个简单例子</span></h2>
+<p>下面我们来看个简单的例子，绘制了两个长方形，其中的一个有着 alpha 透明度。我们将在接下来的内容里深入探索一下这是如何工作的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"application/javascript"</span>&gt;</span></span><br><span class="line"><span class="javascript">      <span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span></span><br><span class="line">        if (canvas.getContext) &#123;</span><br><span class="line"><span class="javascript">          <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">          ctx.fillStyle = <span class="string">'rgb(200,0,0)'</span>;</span></span><br><span class="line">          ctx.fillRect(10, 10, 55, 50);</span><br><span class="line"></span><br><span class="line"><span class="javascript">          ctx.fillStyle = <span class="string">'rgba(0, 0, 200, 0.5)'</span>;</span></span><br><span class="line">          ctx.fillRect(30, 30, 55, 50);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">"draw();"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"150"</span> <span class="attr">height</span>=<span class="string">"150"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-basic-usage/canvas_ex1.png" title="This is an canvas example image">
 
                 
 
@@ -240,13 +258,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/canvas-basic-usage/" data-toggle="tooltip" data-placement="top" title="Canvas的基本用法">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/arithmetic-prime/" data-toggle="tooltip" data-placement="top" title="素数个数统计">Next Post &rarr;</a>
+                            <a href="/article/arithmetic-double-pointer/" data-toggle="tooltip" data-placement="top" title="删除数组中的重复项">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -287,7 +301,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">题目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">解法：双指针算法</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Canvas 教程</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">基础用法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">&lt;canvas&gt;元素</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">替换内容</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">渲染上下文（the rendering context）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">检查支持性</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">一个简单例子</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -307,7 +321,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Arithmetic" title="Arithmetic">Arithmetic</a>
+                          <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
                         
                     </div>
                 </section>

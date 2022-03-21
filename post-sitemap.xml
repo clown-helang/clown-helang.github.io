@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://www.helang.site/article/canvas-basic-usage/</loc>
+        <lastmod>2022-03-21T15:36:08.028Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://www.helang.site/article/arithmetic-double-pointer/</loc>
         <lastmod>2022-03-20T13:19:16.540Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -103,14 +111,6 @@
     </url>
 
     <url>
-        <loc>http://www.helang.site/article/js-inherit/</loc>
-        <lastmod>2021-05-23T13:39:37.118Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://www.helang.site/article/install-nginx/</loc>
         <lastmod>2021-05-23T13:39:37.118Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -120,6 +120,14 @@
 
     <url>
         <loc>http://www.helang.site/article/js-function/</loc>
+        <lastmod>2021-05-23T13:39:37.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.helang.site/article/js-inherit/</loc>
         <lastmod>2021-05-23T13:39:37.118Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
