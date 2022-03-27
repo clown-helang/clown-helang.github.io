@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="何浪，WEB前端开发工程师，擅长React、React Native、Vue、HTML、CSS、JavaScript、微信小程序开发">
+    <meta name="keyword" content="何浪,WEB前端开发工程师,React,React Native,Vue,HTML,CSS,JavaScript,微信小程序开发,Nginx,Tomcat,思想是生命的奴隶,生命是时间的弄人">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <title>
+        
+          Canvas--绘制图形 - 何浪 | 博客
+        
+    </title>
+
+    <link rel="canonical" href="http://www.helang.site/article/canvas-draw-graphics/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
+                            
+                        </div>
+                        <h1>Canvas--绘制图形</h1>
+                        <h2 class="subheading">Canvas系列</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2022-03-27
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">何浪</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="使用-canvas-绘制图形">使用 Canvas 绘制图形</span></h1>
+<p>本章内容学习如何绘制矩形、三角形、直线、圆弧和曲线。绘制物体到 Canvas 前，需要掌握<strong>路径</strong>，下面看一下具体内容。</p>
+<h2><span id="栅格">栅格</span></h2>
+<p>开始画图之前，我们需要了解一下<strong>画布栅格（canvas grid）<strong>以及</strong>坐标空间</strong>。如下图所示，<code>canvas</code>元素默认被网格所覆盖。通常来说网格中的一个单元相当于<code>canvas</code>元素中的一像素。栅格的起点为左上角（坐标为（0,0））。所有元素的位置都相对于原点定位。所以图中蓝色方形左上角的坐标为距离左边（X 轴）x 像素，距离上边（Y 轴）y 像素（坐标为（x,y））。后面我们会平移原点到不同的坐标上，旋转网格以及缩放。现在我们还是使用原来的设置。</p>
+<img src="/article/canvas-draw-graphics/Canvas_default_grid.png" title="This is an canvas example image">
+<h2><span id="绘制矩形">绘制矩形</span></h2>
+<p><code>canvas</code>只支持两种形式的图形绘制：<strong>矩形和路径（由一系列点连成的线段）</strong>。所有其他类型的图形都是通过一条或者多条路径组合而成的。不过，我们拥有众多路径生成的方法让复杂图形的绘制成为了可能。</p>
+<p>首先，我们回到矩形的绘制中。canvas 提供了三种方法绘制矩形：</p>
+<ul>
+<li><code>fillRect(x, y, width, height)</code>绘制一个填充的矩形。</li>
+<li><code>strokeRect(x, y, width, height)</code>绘制一个矩形的边框。</li>
+<li><code>clearRect(x, y, width, height)</code>清除制定矩形区域，让清除部分完全透明。</li>
+</ul>
+<p><code>x</code> 与<code>y</code>指定了在 canvas 画布上所绘制的矩形的左上角（相对于原点）的坐标。width 和 height 设置矩形的尺寸。</p>
+<p>下面的<code>draw()</code>函数是前一页中取得的，现在就来使用上面的三个函数。</p>
+<h2><span id="矩形rectangular例子">矩形（Rectangular）例子</span></h2>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.fillRect(<span class="number">25</span>, <span class="number">25</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    ctx.clearRect(<span class="number">45</span>, <span class="number">45</span>, <span class="number">60</span>, <span class="number">60</span>);</span><br><span class="line">    ctx.fillRect(<span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出如下图所示：</p>
+<img src="/article/canvas-draw-graphics/Canvas_rect.png" title="This is an canvas example image">
+<p><code>fillRect()</code>函数绘制了一个边长为 100px 的黑色正方形。<code>clearRect()</code>函数从正方形的中心开始擦除了一个 60px*60px 的正方形，接着<code>strokeRect()</code>在清除区域内生成一个 50px*50px 的正方形边框。</p>
+<p>不同于后面即将要介绍的<strong>路径函数（path function）</strong>，以上的三个函数绘制之后会马上显现在 canvas 上，即时生效。</p>
+<h2><span id="绘制路径">绘制路径</span></h2>
+<p>图形的基本元素是路径。路径是通过不同颜色和宽度的线段或曲线相连形成的不同形状的点的集合。一个路径，甚至一个子路径，都是闭合的。使用路径绘制图形需要一些额外的步骤。</p>
+<ol>
+<li>创建路径起始点。</li>
+<li>绘制路径。</li>
+<li>闭合闭合。</li>
+<li>描边或填充路径区域。</li>
+</ol>
+<p>以下是所需要用到的函数：</p>
+<p><code>beginPath()</code></p>
+<p>新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径</p>
+<p><code>closePath()</code></p>
+<p>闭合路径之后图形绘制命令又重新指向到上下文中。</p>
+<p><code>stroke()</code></p>
+<p>通过线条来绘制图形轮廓。</p>
+<p><code>fill()</code></p>
+<p>通过填充路径的内容区域生成实心的图形。</p>
+<p>生成路径的第一步叫做 beginPath()。本质上，路径是由很多子路径构成，这些子路径都是在一个列表中，所有的子路径（线、弧形、等等）构成图形。而每次这个方法调用之后，列表清空重置，然后我们就可以重新绘制新的图形。</p>
+<blockquote>
+<p><strong>注意：当前路径为空，即调用 beginPath()之后，或者 canvas 刚建的时候，第一条路径构造命令通常被视为是 moveTo（），无论实际上是什么。出于这个原因，你几乎总是要在设置路径之后专门指定你的起始位置。</strong></p>
+</blockquote>
+<p>第二步就是调用函数指定绘制路径，本文稍后我们就能看到了。</p>
+<p>第三，就是闭合路径 closePath(),不是必需的。这个方法会通过绘制一条从当前点到开始点的直线来闭合图形。如果图形是已经闭合了的，即当前点为开始点，该函数什么也不做。</p>
+<blockquote>
+<p><strong>注意：当你调用 fill()函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用 closePath()函数。但是调用 stroke()时不会自动闭合</strong>。</p>
+</blockquote>
+<h2><span id="绘制一个三角形">绘制一个三角形</span></h2>
+<p>代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line">    ctx.lintTo(<span class="number">100</span>, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/triangle.png" title="This is an canvas example image">
+<h2><span id="移动笔触">移动笔触</span></h2>
+<p>从上面的绘制三角形的代码中可以看到一个方法：<code>moveTo()</code>，虽然它不能画出任何东西，但是他是线段绘制的基础，你可以理解为它就是一个提笔落笔的过程。具体讲<code>moveTo(x, y)</code>就是将笔触移动到制定的坐标<code>x</code>以及<code>y</code>上。</p>
+<p>当<code>canvas</code>初始化或者<code>beginPath()</code>调用后，你通常会使用<code>moveTo</code>函数设置起点。我们也能够使用<code>moveTo</code>绘制一些不连续的路径。看一下下面的笑脸例子。将用到<code>moveTo()</code>方法（红线处）的地方标记了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(<span class="number">75</span>, <span class="number">75</span>, <span class="number">50</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>); <span class="comment">//绘制</span></span><br><span class="line">    ctx.moveTo(<span class="number">110</span>, <span class="number">75</span>);</span><br><span class="line">    ctx.arc(<span class="number">75</span>, <span class="number">75</span>, <span class="number">35</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI, <span class="literal">false</span>); <span class="comment">//口（顺时针）</span></span><br><span class="line">    ctx.moveTo(<span class="number">65</span>, <span class="number">65</span>);</span><br><span class="line">    ctx.arc(<span class="number">60</span>, <span class="number">65</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>); <span class="comment">//左眼睛</span></span><br><span class="line">    ctx.moveTo(<span class="number">95</span>, <span class="number">65</span>);</span><br><span class="line">    ctx.arc(<span class="number">90</span>, <span class="number">65</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>); <span class="comment">//右眼睛</span></span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下所示：</p>
+<img src="/article/canvas-draw-graphics/Canvas_smiley.png" title="This is an canvas example image">
+<p>如果你想看到连续的线，你可以移除调用的<code>moveTo()</code>。</p>
+<h2><span id="线">线</span></h2>
+<p>绘制直线，需要用到的方法<code>lineTo()</code>。</p>
+<p><code>lineTo(x, y)</code></p>
+<p>绘制一条从当前位置到制定<code>x</code>以及<code>y</code>位置的直线。</p>
+<p>该方法有两个参数：<code>x</code>以及<code>y</code>，代表坐标系中直线结束的点。开始点和之前的绘制路径有关，之前瑞金的街书店就是接下来的开始点，等等。。。开始点也可以通过<code>moveTo()</code>函数改变。</p>
+<p>下面的例子绘制两个三角形，一个是填充的，另一个是描边的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 填充三角形</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">25</span>, <span class="number">25</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">105</span>, <span class="number">25</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">25</span>, <span class="number">105</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 描边三角形</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">125</span>, <span class="number">125</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">125</span>, <span class="number">45</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">45</span>, <span class="number">125</span>);</span><br><span class="line">    ctx.closePath();</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/lineTo.png" title="This is an canvas example image">
+<p>需要注意的是，<code>fill</code>可以自动闭合路径，而<code>stroke</code>不会自动闭合路径。如果没有使用<code>closePath()</code>，则只会绘制出响应的线段。</p>
+<h2><span id="圆弧">圆弧</span></h2>
+<p>绘制圆弧或者圆，我们使用<code>arc()</code>方法。</p>
+<p><code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code></p>
+<p>画一个以<code>x</code>和<code>y</code>为圆心的以<code>radius</code>为半径的圆弧（圆），从<code>startAngle</code>开始到<code>endAngle</code>结束，按照<code>anticlockwise</code>给定的方向（默认为顺时针）来生成。这些都是以 x 轴为基数。参数<code>anticlockwise</code>为一个布尔值。为<code>true</code>是，是逆时针方向，否则顺时针方向。</p>
+<blockquote>
+<p>注意：<code>arc()</code>函数中表示角的单位是弧度，不是角度。角度与弧度的<code>js</code>表达式：<code>弧度=(Math.PI/180)*角度</code>。</p>
+</blockquote>
+<p>下面的例子比上面的要复杂一下，下面绘制了 12 个不同的角度以及填充的圆弧。</p>
+<p>下面两个<code>for</code>循环，生成圆弧的行列<code>(x,y)</code>坐标。每一段圆弧的开始都调用<code>beginPath()</code>。代码中，每个圆弧的参数都是可变的，实际编程中，我们并不需要这样做。</p>
+<p><code>x,y</code>坐标是可变的。半径（<code>radius</code>）和开始角度（<code>startAngle</code>）都是固定的。结束角度（<code>endAngle</code>）在第一列开始时是 180 度（半圆）然后每列增加 90 度。最后一列形成一个完整的圆。</p>
+<p><code>clockwise</code>语句作用于第一、三行是顺时针的圆弧，<code>anticlockwise</code>作用于二、四行为逆时针圆弧。<code>if</code>语句让一、二行描边圆弧，下面两行填充路径。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> radius = <span class="number">20</span>; <span class="comment">// 半径</span></span><br><span class="line">    <span class="keyword">const</span> startAngle = <span class="number">0</span>; <span class="comment">// 起始角度</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; j++) &#123;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> x = <span class="number">25</span> + j * <span class="number">50</span>; <span class="comment">// x 坐标值</span></span><br><span class="line">        <span class="keyword">const</span> y = <span class="number">25</span> + i * <span class="number">50</span>; <span class="comment">// y 坐标值</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> endAngle = <span class="built_in">Math</span>.PI + (<span class="built_in">Math</span>.PI * j) / <span class="number">2</span>; <span class="comment">//结束角度</span></span><br><span class="line">        <span class="keyword">const</span> anticlockwise = i % <span class="number">2</span> !== <span class="number">0</span>; <span class="comment">// 是否逆时针</span></span><br><span class="line"></span><br><span class="line">        ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">1</span>) &#123;</span><br><span class="line">          ctx.fill();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          ctx.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/Canvas_arc.png" title="This is an canvas example image">
+<h2><span id="二次贝塞尔曲线及三次贝塞尔曲线">二次贝塞尔曲线及三次贝塞尔曲线</span></h2>
+<p>二次及三次贝塞尔曲线都十分有用，一般用来绘制复杂有规律的图形。</p>
+<p><code>quadraticCurveTo(cp1x, cp1y, x, y)</code></p>
+<p>绘制二次贝塞尔曲线，<code>cp1x,cp1y</code>为一个控制点，<code>x,y</code>为结束点。</p>
+<p><code>bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</code></p>
+<p>绘制三次贝塞尔曲线，<code>cp1x,cp1y</code>为控制点一，<code>cp2x,cp2y</code>为控制点二，<code>x,y</code>为结束点。</p>
+<p>下面的图能够很好的描述两者的关系，二次贝塞尔曲线有一个开始点（蓝色）、一个结束点（蓝色）以及一个控制点（红色），而三次贝塞尔曲线有两个控制点。</p>
+<img src="/article/canvas-draw-graphics/Canvas_curves.png" title="This is an canvas example image">
+<p>参数<code>x、y</code>在这两个方法中都是结束点坐标。<code>cp1x,cp1y</code>为坐标中的第一个控制点，<code>cp2x,cp2y</code>为坐标中的第二个控制点。</p>
+<p>使用二次以及三次贝塞尔曲线是有一定的难度的，因为不同于像 Adobe Illustrators 这样的矢量软件，我们所绘制的曲线没有给我们提供直接的视觉反馈。这让绘制复杂的图形变得十分困难。在下面的例子中，我们会绘制一些简单有规律的图形，如果你有时间以及更多的耐心,很多复杂的图形你也可以绘制出来。</p>
+<p>下面的这些例子没有多少困难。这两个例子中我们会连续绘制贝塞尔曲线，最后形成复杂的图形。</p>
+<p><strong>二次贝塞尔曲线</strong></p>
+<p>使用多个贝塞尔曲线来渲染对话气泡。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 二次贝塞尔曲线</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">75</span>, <span class="number">75</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">62.5</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">25</span>, <span class="number">100</span>, <span class="number">50</span>, <span class="number">100</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">50</span>, <span class="number">120</span>, <span class="number">30</span>, <span class="number">125</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">60</span>, <span class="number">120</span>, <span class="number">65</span>, <span class="number">100</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">125</span>, <span class="number">100</span>, <span class="number">125</span>, <span class="number">62.5</span>);</span><br><span class="line">    ctx.quadraticCurveTo(<span class="number">125</span>, <span class="number">25</span>, <span class="number">75</span>, <span class="number">25</span>);</span><br><span class="line">    ctx.stroke();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/Canvas_quadratic.png" title="This is an canvas example image">
+<h2><span id="三次贝塞尔曲线">三次贝塞尔曲线</span></h2>
+<p>使用贝塞尔曲线绘制心形。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 三次贝塞尔曲线</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">75</span>, <span class="number">40</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">75</span>, <span class="number">37</span>, <span class="number">70</span>, <span class="number">25</span>, <span class="number">50</span>, <span class="number">25</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">20</span>, <span class="number">25</span>, <span class="number">20</span>, <span class="number">62.5</span>, <span class="number">20</span>, <span class="number">62.5</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">20</span>, <span class="number">80</span>, <span class="number">40</span>, <span class="number">102</span>, <span class="number">75</span>, <span class="number">120</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">110</span>, <span class="number">102</span>, <span class="number">130</span>, <span class="number">80</span>, <span class="number">130</span>, <span class="number">62.5</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">130</span>, <span class="number">62.5</span>, <span class="number">130</span>, <span class="number">25</span>, <span class="number">100</span>, <span class="number">25</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">85</span>, <span class="number">25</span>, <span class="number">75</span>, <span class="number">37</span>, <span class="number">75</span>, <span class="number">40</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/Canvas_bezier.png" title="This is an canvas example image">
+<h2><span id="矩形">矩形</span></h2>
+<p>绘制矩形的方式除了前面我们使用的<code>fillRect</code>和<code>strokeRect</code>，还有<code>rect()</code>方法，将一个矩形路径增加到当前路径上。</p>
+<p><code>rect(x, y, width, height)</code></p>
+<p>绘制一个左上角坐标为<code>(x, y)</code>，宽高为<code>width</code>以及<code>height</code>的矩形。</p>
+<p>当该方法执行的时候，<code>moveTo()</code>方法自动设置坐标参数<code>（0, 0）</code>。也就是说，当前笔触自动重置回默认坐标。</p>
+<h2><span id="组合使用">组合使用</span></h2>
+<p>目前为止，每一个例子中的每个图形都只用到一种类型的路径。然而，绘制一个图形并没有限制使用数量以及类型。所以在最后的一个例子里，让我们组合使用所有的路径函数来重现一款著名的游戏。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    roundedRect(ctx, <span class="number">12</span>, <span class="number">12</span>, <span class="number">170</span>, <span class="number">162</span>, <span class="number">15</span>);</span><br><span class="line">    roundedRect(ctx, <span class="number">19</span>, <span class="number">19</span>, <span class="number">156</span>, <span class="number">148</span>, <span class="number">9</span>);</span><br><span class="line">    roundedRect(ctx, <span class="number">53</span>, <span class="number">53</span>, <span class="number">49</span>, <span class="number">33</span>, <span class="number">10</span>);</span><br><span class="line">    roundedRect(ctx, <span class="number">53</span>, <span class="number">119</span>, <span class="number">49</span>, <span class="number">16</span>, <span class="number">6</span>);</span><br><span class="line">    roundedRect(ctx, <span class="number">135</span>, <span class="number">53</span>, <span class="number">30</span>, <span class="number">33</span>, <span class="number">10</span>);</span><br><span class="line">    roundedRect(ctx, <span class="number">135</span>, <span class="number">119</span>, <span class="number">25</span>, <span class="number">40</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(<span class="number">37</span>, <span class="number">37</span>, <span class="number">13</span>, <span class="built_in">Math</span>.PI / <span class="number">7</span>, -<span class="built_in">Math</span>.PI / <span class="number">7</span>, <span class="literal">false</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">31</span>, <span class="number">37</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">      ctx.fillRect(<span class="number">51</span> + i * <span class="number">16</span>, <span class="number">35</span>, <span class="number">4</span>, <span class="number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">      ctx.fillRect(<span class="number">115</span>, <span class="number">51</span> + i * <span class="number">16</span>, <span class="number">4</span>, <span class="number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i++) &#123;</span><br><span class="line">      ctx.fillRect(<span class="number">51</span> + i * <span class="number">16</span>, <span class="number">99</span>, <span class="number">4</span>, <span class="number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">83</span>, <span class="number">116</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">83</span>, <span class="number">102</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">83</span>, <span class="number">94</span>, <span class="number">89</span>, <span class="number">88</span>, <span class="number">97</span>, <span class="number">88</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">105</span>, <span class="number">88</span>, <span class="number">111</span>, <span class="number">94</span>, <span class="number">111</span>, <span class="number">102</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">111</span>, <span class="number">116</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">106.333</span>, <span class="number">111.333</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">101.666</span>, <span class="number">116</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">97</span>, <span class="number">111.333</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">92.333</span>, <span class="number">116</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">87.666</span>, <span class="number">111.333</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">83</span>, <span class="number">116</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = <span class="string">'white'</span>;</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">91</span>, <span class="number">96</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">88</span>, <span class="number">96</span>, <span class="number">87</span>, <span class="number">99</span>, <span class="number">87</span>, <span class="number">101</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">87</span>, <span class="number">103</span>, <span class="number">88</span>, <span class="number">106</span>, <span class="number">91</span>, <span class="number">106</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">94</span>, <span class="number">106</span>, <span class="number">95</span>, <span class="number">103</span>, <span class="number">95</span>, <span class="number">101</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">95</span>, <span class="number">99</span>, <span class="number">94</span>, <span class="number">96</span>, <span class="number">91</span>, <span class="number">96</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">103</span>, <span class="number">96</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">100</span>, <span class="number">96</span>, <span class="number">99</span>, <span class="number">99</span>, <span class="number">99</span>, <span class="number">101</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">99</span>, <span class="number">103</span>, <span class="number">100</span>, <span class="number">106</span>, <span class="number">103</span>, <span class="number">106</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">106</span>, <span class="number">106</span>, <span class="number">107</span>, <span class="number">103</span>, <span class="number">107</span>, <span class="number">101</span>);</span><br><span class="line">    ctx.bezierCurveTo(<span class="number">107</span>, <span class="number">99</span>, <span class="number">106</span>, <span class="number">96</span>, <span class="number">103</span>, <span class="number">96</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = <span class="string">'black'</span>;</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(<span class="number">101</span>, <span class="number">102</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.arc(<span class="number">89</span>, <span class="number">102</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 封装的一个用于绘制圆角矩形的函数.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">roundedRect</span>(<span class="params">ctx, x, y, width, height, radius</span>) </span>&#123;</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.moveTo(x, y + radius);</span><br><span class="line">  ctx.lineTo(x, y + height - radius);</span><br><span class="line">  ctx.quadraticCurveTo(x, y + height, x + radius, y + height);</span><br><span class="line">  ctx.lineTo(x + width - radius, y + height);</span><br><span class="line">  ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);</span><br><span class="line">  ctx.lineTo(x + width, y + radius);</span><br><span class="line">  ctx.quadraticCurveTo(x + width, y, x + width - radius, y);</span><br><span class="line">  ctx.lineTo(x + radius, y);</span><br><span class="line">  ctx.quadraticCurveTo(x, y, x, y + radius);</span><br><span class="line">  ctx.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/Canvas_combination.png" title="This is an canvas example image">
+<h2><span id="path2d-对象">Path2D 对象</span></h2>
+<p>正如我们在前面例子中看到的，你可以使用一系列的路径和绘画命令来把对象“画”在画布上。为了简化代码和提高性能，<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Path2D" target="_blank" rel="noopener"><code>Path2D</code></a>对象已可以在较新版本的浏览器中使用，用来缓存或记录绘画命令，这样你将能快速地回顾路径。</p>
+<p>怎样产生一个<code>Path2D</code>对象呢？</p>
+<p><code>Path2D()</code></p>
+<p><code>Path2D()</code>会返回一个新初始化的<code>Path2D</code>对象（可能将某一个路径作为变量——创建一个它的副本，或者将一个包含<code>SVG path</code>数据的字符串作为变量）。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Path2D(); <span class="comment">// 空的Path对象</span></span><br><span class="line"><span class="keyword">new</span> Path2D(path); <span class="comment">// 克隆Path对象</span></span><br><span class="line"><span class="keyword">new</span> Path2D(d); <span class="comment">// 从SVG建立Path对象</span></span><br></pre></td></tr></table></figure>
+<p>所有的路径方法比如<code>moveTo</code>, <code>rect</code>, <code>arc</code>或<code>quadraticCurveTo</code>等，如我们前面见过的，都可以在 Path2D 中使用。</p>
+<p><code>Path2D API</code> 添加了 <code>addPath</code>作为将<code>path</code>结合起来的方法。当你想要从几个元素中来创建对象时，这将会很实用。比如：</p>
+<p><code>Path2D.addPath(path [, transform\])</code></p>
+<p>添加了一条路径到当前路径（可能添加了一个变换矩阵）。</p>
+<p><strong>Path2D 示例</strong></p>
+<p>在这个例子中，我们创造了一个矩形和一个圆。它们都被存为<code>Path2D</code>对象，后面再派上用场。随着新的<code>Path2D API</code>产生，几种方法也相应地被更新来使用<code>Path2D</code>对象而不是当前路径。在这里，带路径参数的<code>stroke</code>和<code>fill</code>可以把对象画在画布上。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> rectangle = <span class="keyword">new</span> Path2D();</span><br><span class="line">    rectangle.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> circle = <span class="keyword">new</span> Path2D();</span><br><span class="line">    circle.moveTo(<span class="number">125</span>, <span class="number">35</span>);</span><br><span class="line">    circle.arc(<span class="number">100</span>, <span class="number">35</span>, <span class="number">25</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="built_in">Math</span>.PI);</span><br><span class="line"></span><br><span class="line">    ctx.stroke(rectangle);</span><br><span class="line">    ctx.fill(circle);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/path2d.png" title="This is an canvas example image">
+<p><strong>使用 SVG paths</strong></p>
+<p>新的<code>Path2D API</code>有另一个强大的特点，就是使用<code>SVG path data</code>来初始化<code>canvas</code>上的路径。这将使你获取路径时可以以<code>SVG</code>或<code>canvas</code>的方式来重用它们。</p>
+<p>这条路径将先移动到点 <code>(M10 10)</code> 然后再水平移动 80 个单位<code>(h 80)</code>，然后下移 80 个单位 <code>(v 80)</code>，接着左移 80 个单位 <code>(h -80)</code>，再回到起点处 (<code>z</code>)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> p = <span class="keyword">new</span> Path2D(<span class="string">'M10 10 h 80 v 80 h -80 Z'</span>);</span><br><span class="line">    ctx.fill(p);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-draw-graphics/image-20220327223348766.png" title="This is an canvas example image">
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/canvas-basic-usage/" data-toggle="tooltip" data-placement="top" title="Canvas--基本用法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用 Canvas 绘制图形</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">栅格</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">绘制矩形</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">矩形（Rectangular）例子</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">绘制路径</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">绘制一个三角形</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">移动笔触</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">线</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">圆弧</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">二次贝塞尔曲线及三次贝塞尔曲线</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">三次贝塞尔曲线</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.11.</span> <span class="toc-nav-text">矩形</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.12.</span> <span class="toc-nav-text">组合使用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.13.</span> <span class="toc-nav-text">Path2D 对象</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/clown-helang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 何浪 2022 
+                    <br>
+                    <!--Theme by <a href="http://beantech.org">BeanTech</a> -->
+                    <!--<span style="display: inline-block; margin: 0 5px;">-->
+                        <!--<i class="fa fa-heart"></i>-->
+                    <!--</span> -->
+                    <!--re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | -->
+                    <!--<iframe-->
+                        <!--style="margin-left: 2px; margin-bottom:-5px;"-->
+                        <!--frameborder="0" scrolling="0" width="91px" height="20px"-->
+                        <!--src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >-->
+                    <!--</iframe>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.helang.site/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.helang.site/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
