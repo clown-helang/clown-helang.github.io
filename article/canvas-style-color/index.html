@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="何浪，WEB前端开发工程师，擅长React、React Native、Vue、HTML、CSS、JavaScript、微信小程序开发">
+    <meta name="keyword" content="何浪,WEB前端开发工程师,React,React Native,Vue,HTML,CSS,JavaScript,微信小程序开发,Nginx,Tomcat,思想是生命的奴隶,生命是时间的弄人">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+    <title>
+        
+          Canvas--添加样式和颜色 - 何浪 | 博客
+        
+    </title>
+
+    <link rel="canonical" href="http://www.helang.site/article/canvas-style-color/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
+                            
+                        </div>
+                        <h1>Canvas--添加样式和颜色</h1>
+                        <h2 class="subheading">Canvas系列</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2022-04-03
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">何浪</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="使用样式和颜色">使用样式和颜色</span></h1>
+<p>在<a href="https://www.helang.site/article/canvas-draw-graphics/">绘制图形</a>的篇章里，我只用到默认的线条和填充样式。而在这一章里，我们将会探讨 canvas 全部的可选项，来绘制出更加吸引人的内容。</p>
+<h2><span id="色彩-colors">色彩 Colors</span></h2>
+<p>到目前为止，我们只看到过绘制内容的方法。如果我们想要给图形上色，有两个重要的属性可以做到：<code>fillStyle</code> 和 <code>strokeStyle</code>。</p>
+<p><code>fillStyle = color</code></p>
+<p>​ 设置图形的填充颜色</p>
+<p><code>strokeStyle = color</code></p>
+<p>​ 设置图形轮廓的颜色</p>
+<p><code>color</code>可以是表示<code>CSS</code>颜色值的字符串，渐变对象或者图案对象。默认情况下，线条和填充颜色都是黑色（<code>#000000</code>）。</p>
+<h2><span id="fillstyle示例"><code>fillStyle</code>示例</span></h2>
+<p>使用两层<code>for</code>循环来绘制一个 6*6 的渐变色方格色卡效果，具体代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">        ctx.fillStyle = <span class="string">`rgb(<span class="subst">$&#123;<span class="built_in">Math</span>.floor(<span class="number">255</span> - <span class="number">42.5</span> * i)&#125;</span>, rgb(<span class="subst">$&#123;<span class="built_in">Math</span>.floor(</span></span></span><br><span class="line"><span class="string"><span class="subst">          <span class="number">255</span> - <span class="number">42.5</span> * j</span></span></span><br><span class="line"><span class="string"><span class="subst">        )&#125;</span>, 0)`</span>;</span><br><span class="line">        ctx.fillRect(j * <span class="number">25</span>, i * <span class="number">25</span>, <span class="number">25</span>, <span class="number">25</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_fillstyle.png" title="This is an canvas example image">
+<h2><span id="strokestyle示例"><code>strokeStyle</code>示例</span></h2>
+<p>与上面的示例比较相似，我们使用<code>arc</code>结合<code>strokeStyle</code>来绘制一面洞洞板。具体代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; <span class="number">6</span>; j++) &#123;</span><br><span class="line">        ctx.strokeStyle = <span class="string">`rgb(0, <span class="subst">$&#123;<span class="number">256</span> - <span class="number">45.5</span> * i&#125;</span>, <span class="subst">$&#123;<span class="number">256</span> - <span class="number">45.5</span> * j&#125;</span>)`</span>;</span><br><span class="line">        ctx.beginPath();</span><br><span class="line">        ctx.arc(<span class="number">12.5</span> + <span class="number">25</span> * j, <span class="number">12.5</span> + <span class="number">25</span> * i, <span class="number">10</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">        ctx.stroke();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_strokestyle.png" title="This is an canvas example image">
+<h2><span id="透明度-transparency">透明度 Transparency</span></h2>
+<p>想要在 canvas 中绘制一个具有透明度的图形通常有两种方式：</p>
+<ol>
+<li>使用<code>globalAlpha</code>属性。</li>
+<li>使用<code>rgba()</code>方法。</li>
+</ol>
+<p>两种方法接受的透明度参数规则是一样的。有效范围是从 0.0（完全透明）到 1.0（完全不透明）。</p>
+<h3><span id="globalalpha示例"><code>globalAlpha</code>示例</span></h3>
+<p>实现一个四色格作为背景，设置 <code>globalAlpha</code> 为 <code>0.2</code> 后，在上面画一系列半径递增的半透明圆。最终结果是一个径向渐变效果。圆叠加得越更多，原先所画的圆的透明度会越低。通过增加循环次数，画更多的圆，从中心到边缘部分，背景图会呈现逐渐消失的效果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getelementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = <span class="string">'#FD0'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">75</span>, <span class="number">75</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'#6C0'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">75</span>, <span class="number">0</span>, <span class="number">75</span>, <span class="number">75</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'#09F'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'#F30'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">75</span>);</span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = <span class="string">'#FFF'</span>;</span><br><span class="line">    <span class="comment">// 设置透明度值</span></span><br><span class="line">    ctx.globalAlpha = <span class="number">0.2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画半透明圆</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">7</span>; i++) &#123;</span><br><span class="line">      ctx.beginPath();</span><br><span class="line">      ctx.arc(<span class="number">75</span>, <span class="number">75</span>, <span class="number">10</span> + <span class="number">10</span> * i, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">      ctx.fill();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_globalalpha.png" title="This is an canvas example image">
+<h3><span id="rgba示例"><code>rgba()</code>示例</span></h3>
+<p>和上面那个类似，不过不是画圆，而是画矩形。这里还可以看出，rgba() 可以分别设置轮廓和填充样式，因而具有更好的可操作性和使用灵活性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getelementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画背景</span></span><br><span class="line">    ctx.fillStyle = <span class="string">'rgb(255,221,0)'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">37.5</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'rgb(102,204,0)'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">37.5</span>, <span class="number">150</span>, <span class="number">37.5</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'rgb(0,153,255)'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">75</span>, <span class="number">150</span>, <span class="number">37.5</span>);</span><br><span class="line">    ctx.fillStyle = <span class="string">'rgb(255,51,0)'</span>;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">112.5</span>, <span class="number">150</span>, <span class="number">37.5</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画半透明矩形</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      ctx.fillStyle = <span class="string">`rgba(255, 255, 255, <span class="subst">$&#123;(i + <span class="number">1</span>) <span class="regexp">/ 10&#125;)`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      for (let j = 0; j &lt; 4; j++) &#123;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">        ctx.fillRect(5 + i * 14, 5 + j * 37.5, 14, 27.5);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">      &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">  &#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">&#125;</span></span></span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_rgba.png" title="This is an canvas example image">
+<h2><span id="线型-line-styles">线型 Line styles</span></h2>
+<p>可以通过一系列属性来设置线的样式</p>
+<ul>
+<li><code>lineWidth = value</code> 设置线条宽度</li>
+<li><code>lineCap = type</code> 设置线条末端样式</li>
+<li><code>lineJoin = type</code> 设置线条与先条件结合处的样式</li>
+<li><code>miterLimit = value</code> 限制当两条线相交时交接处最大长度；所谓交接处长度（斜街长度）是指线条交接处内角定点到外角顶点的长度。</li>
+<li><code>getLineDash()</code>返回一个包含当前虚线样式，长度为非负偶数的数组。</li>
+<li><code>setLineDash(segments)</code>设置当前虚线样式。</li>
+<li><code>lineDashOffset = value</code>设置虚线样式的起始偏移量。</li>
+</ul>
+<h3><span id="linewidth-属性的例子"><code>lineWidth</code> 属性的例子</span></h3>
+<p>这个属性设置当前绘线的粗细。属性值必须为正数。默认值是 1.0。</p>
+<p>线宽是指给定路径的中心到两边的粗细。换句话说就是在路径的两边各绘制线宽的一半。因为画布的坐标并不和像素直接对应，当需要获得精确的水平或垂直线的时候要特别注意。</p>
+<p>在下面的例子中，用递增的宽度绘制了 10 条直线。最左边的线宽 1.0 单位。并且，最左边的以及所有宽度为奇数的线并不能精确呈现，这就是因为路径的定位问题。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">      ctx.lineWidth = <span class="number">1</span> + i;</span><br><span class="line">      ctx.beginPath();</span><br><span class="line">      ctx.moveTo(<span class="number">5</span> + i * <span class="number">14</span>, <span class="number">5</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">5</span> + i * <span class="number">14</span>, <span class="number">140</span>);</span><br><span class="line">      ctx.stroke();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_linewidth.png" title="This is an canvas example image">
+<p>想要获得精确的线条，必须对线条是如何描绘出来的有所理解。见下图，用网格来代表 <code>canvas</code> 的坐标格，每一格对应屏幕上一个像素点。在第一个图中，填充了 <code>(2,1)</code> 至<code>(5,5)</code> 的矩形，整个区域的边界刚好落在像素边缘上，这样就可以得到的矩形有着清晰的边缘。</p>
+<img src="/article/canvas-style-color/canvas-grid.png" title="This is an canvas example image">
+<p>如果你想要绘制一条从<code>(3,1)</code> 到 <code>(3,5)</code>，宽度是 1.0 的线条，你会得到像第二幅图一样的结果。实际填充区域（深蓝色部分）仅仅延伸至路径两旁各一半像素。而这半个像素又会以近似的方式进行渲染，这意味着那些像素只是部分着色，结果就是以实际笔触颜色一半色调的颜色来填充整个区域（浅蓝和深蓝的部分）。这就是上例中为何宽度为 <code>1.0</code> 的线并不准确的原因。</p>
+<p>要解决这个问题，你必须对路径施以更加精确的控制。已知粗 <code>1.0</code> 的线条会在路径两边各延伸半像素，那么像第三幅图那样绘制从 <code>(3.5,1)</code> 到 <code>(3.5,5)</code> 的线条，其边缘正好落在像素边界，填充出来就是准确的宽为 1.0 的线条</p>
+<h3><span id="linecap-属性的例子"><code>lineCap</code> 属性的例子</span></h3>
+<p>属性 <code>lineCap</code> 的值决定了线段端点显示的样子。它可以为下面的三种的其中之一：<code>butt</code>，<code>round</code> 和 <code>square</code>。默认是 <code>butt。</code></p>
+<p>在这个例子里面，我绘制了三条直线，分别赋予不同的 <code>lineCap</code> 值。还有两条辅助线，为了可以看得更清楚它们之间的区别，三条线的起点终点都落在辅助线上。</p>
+<p>最左边的线用了默认的 <code>butt</code> 。可以注意到它是与辅助线齐平的。中间的是 <code>round</code> 的效果，端点处加上了半径为一半线宽的半圆。右边的是 <code>square</code> 的效果，端点处加上了等宽且高度为一半线宽的方块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">const</span> lineCaps = [<span class="string">'butt'</span>, <span class="string">'round'</span>, <span class="string">'square'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建路径</span></span><br><span class="line">    ctx.strokeStyle = <span class="string">'#09f'</span>;</span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">140</span>, <span class="number">10</span>);</span><br><span class="line">    ctx.moveTo(<span class="number">10</span>, <span class="number">140</span>);</span><br><span class="line">    ctx.lineTo(<span class="number">140</span>, <span class="number">140</span>);</span><br><span class="line">    ctx.storke();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 画线条</span></span><br><span class="line">    ctx.strokeStyle = <span class="string">'black'</span>;</span><br><span class="line">    ctx.lineWidth = <span class="number">15</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lineCaps.length; i++) &#123;</span><br><span class="line">      ctx.lineCap = lineCaps[i];</span><br><span class="line">      ctx.beginPath();</span><br><span class="line">      ctx.moveTo(<span class="number">25</span> + <span class="number">50</span> * i, <span class="number">10</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">25</span> + <span class="number">50</span> * i, <span class="number">140</span>);</span><br><span class="line">      ctx.stroke();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_linecap.png" title="This is an canvas example image">
+<h3><span id="linejoin-属性的例子"><code>lineJoin</code> 属性的例子</span></h3>
+<p><code>lineJoin</code> 的属性值决定了图形中两线段连接处所显示的样子。它可以是这三种之一：<code>round</code>, <code>bevel</code> 和 <code>miter。</code>默认是 <code>miter</code>。</p>
+<p>这里我同样用三条折线来做例子，分别设置不同的 <code>lineJoin</code> 值。最上面一条是 <code>round</code> 的效果，边角处被磨圆了，圆的半径等于线宽。中间和最下面一条分别是 <code>bevel</code> 和 <code>miter</code> 的效果。当值是 <code>miter</code>的时候，线段会在连接处外侧延伸直至交于一点，延伸效果受到下面将要介绍的 <code>miterLimit</code> 属性的制约。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">if</span> (canvas.getContext) &#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">const</span> lineJoins = [<span class="string">'round'</span>, <span class="string">'bevel'</span>, <span class="string">'miter'</span>];</span><br><span class="line"></span><br><span class="line">    ctx.lineWidth = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; lineCaps.length; i++) &#123;</span><br><span class="line">      ctx.lineCap = lineCaps[i];</span><br><span class="line">      ctx.beginPath();</span><br><span class="line">      ctx.moveTo(<span class="number">-5</span>, <span class="number">5</span> + i * <span class="number">40</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">35</span>, <span class="number">45</span> + i * <span class="number">40</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">75</span>, <span class="number">5</span> + i * <span class="number">40</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">115</span>, <span class="number">45</span> + i * <span class="number">40</span>);</span><br><span class="line">      ctx.lineTo(<span class="number">155</span>, <span class="number">5</span> + i * <span class="number">40</span>);</span><br><span class="line">      ctx.stroke();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_linejoin.png" title="This is an canvas example image">
+<h3><span id="miterlimit-属性的例子"><code>miterLimit</code> 属性的例子</span></h3>
+<p>就如上一个例子所见的应用 <code>miter</code> 的效果，线段的外侧边缘会被延伸交汇于一点上。线段之间夹角比较大时，交点不会太远，但随着夹角变小，交点距离会呈指数级增大。</p>
+<p><code>miterLimit</code> 属性就是用来设定外延交点与连接点的最大距离，如果交点距离大于此值，连接效果会变成了 bevel。注意，最大斜接长度（即交点距离）是当前坐标系测量线宽与此<code>miterLimit</code>属性值（默认为 10.0）的乘积，所以<code>miterLimit</code>可以单独设置，不受显示比例改变或任何仿射变换的影响：它只影响线条边缘的有效绘制形状。</p>
+<p>更准确的说，斜接限定值（<code>miterLimit</code>）是延伸长度（在 HTML Canvas 中，这个值是线段外连接点与路径中指定的点之间的距离）与一半线宽的最大允许比值。它也可以被等效定义为线条内外连接点距离（<code>miterLength</code>）与线宽（<code>lineWidth</code>）的最大允许比值（因为路径点是内外连接点的中点）。这等同于相交线段最小内夹角（<em>θ</em> ）的一半的余割值，小于此角度的斜接将不会被渲染，而仅渲染斜边连接：</p>
+<ul>
+<li><code>miterLimit</code> = <strong>max</strong> <code>miterLength</code> / <code>lineWidth</code> = 1 / <strong>sin</strong> ( <strong>min</strong> <em>θ</em> / 2 )</li>
+<li>斜接限定值默认为 10.0，这将会去除所有小于大约 11 度的斜接。</li>
+<li>斜接限定值为 √2 ≈ 1.4142136 （四舍五入）时，将去除所有锐角的斜接，仅保留钝角或直角。</li>
+<li>1.0 是合法的斜接限定值，但这会去除所有斜接。</li>
+<li>小于 1.0 的值不是合法的斜接限定值。</li>
+</ul>
+<p>在此示例中，当<code>miterLimit</code>的值小于 4.2 时，图形可见部分的边角不会延伸相交，而是在蓝色线条边呈现斜边连接效果；当<code>miterLimit</code>的值大于 10.0 时，此例中大部分的边角都会在远离蓝线的位置相交，且从左至右，距离随着夹角的增大而减小；而介于上述值之间的值所呈现的效果，也介于两者之间。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 清空画布</span></span><br><span class="line">    ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制参考线</span></span><br><span class="line">    ctx.strokeStyle = <span class="string">'#09f'</span>;</span><br><span class="line">    ctx.lineWidth   = <span class="number">2</span>;</span><br><span class="line">    ctx.strokeRect(<span class="number">-5</span>, <span class="number">50</span>, <span class="number">160</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置线条样式</span></span><br><span class="line">    ctx.strokeStyle = <span class="string">'#000'</span>;</span><br><span class="line">    ctx.lineWidth = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置斜接限定值</span></span><br><span class="line">    ctx.miterLimit = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制线条</span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(<span class="number">0</span>, <span class="number">100</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">24</span> ; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> dy = i % <span class="number">2</span> == <span class="number">0</span> ? <span class="number">25</span> : <span class="number">-25</span>;</span><br><span class="line">        <span class="keyword">const</span>.lineTo(<span class="built_in">Math</span>.pow(i, <span class="number">1.5</span>) * <span class="number">2</span>, <span class="number">75</span> + dy);</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_miterlimit.png" title="This is an canvas example image">
+<h3><span id="使用虚线">使用虚线</span></h3>
+<p>用 <code>setLineDash</code> 方法和 <code>lineDashOffset</code> 属性来制定虚线样式. <code>setLineDash</code> 方法接受一个数组，来指定线段与间隙的交替；<code>lineDashOffset</code>属性设置起始偏移量.</p>
+<p>在这个例子中，我们要创建一个蚂蚁线的效果。它往往应用在计算机图形程序选区工具动效中。它可以帮助用户通过动画的边界来区分图像背景选区边框。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line"><span class="keyword">let</span> offset = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">  ctx.setLineDash([<span class="number">4</span>, <span class="number">2</span>]);</span><br><span class="line">  ctx.lineDashOffset = -offset;</span><br><span class="line">  ctx.strokeRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">march</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  offset++;</span><br><span class="line">  <span class="keyword">if</span> (offset &gt; <span class="number">16</span>) &#123;</span><br><span class="line">    offset = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  draw();</span><br><span class="line">  setTimeout(march, <span class="number">20</span>);</span><br><span class="line">&#125;</span><br><span class="line">march();</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_LineDash.gif" title="This is an canvas example image">
+<h2><span id="渐变">渐变</span></h2>
+<p>和一般的绘图软件一样，我们可以用线性或者径向的渐变来填充或描边。我们用下面的方法新建一个 <code>canvasGradient</code> 对象，并且赋给图形的 <code>fillStyle</code> 或 <code>strokeStyle</code> 属性。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/createLinearGradient" target="_blank" rel="noopener"><code>createLinearGradient(x1, y1, x2, y2)</code></a></p>
+<p>​ <code>createLinearGradient</code> 方法接受 4 个参数，表示渐变的起点 <code>(x1,y1)</code> 与终点 <code>(x2,y2</code>)。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/createRadialGradient" target="_blank" rel="noopener"><code>createRadialGradient(x1, y1, r1, x2, y2, r2)</code></a></p>
+<p>​ <code>createRadialGradient</code> 方法接受 6 个参数，前三个定义一个以<code>(x1,y1)</code> 为原点，半径为 <code>r1</code> 的圆，后三个参数则定义另一个以<code>(x2,y2)</code> 为原点，半径为 <code>r2</code> 的圆。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lineargradient = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line"><span class="keyword">const</span> radialgradient = ctx.createRadialGradient(<span class="number">75</span>, <span class="number">75</span>, <span class="number">0</span>, <span class="number">75</span>, <span class="number">75</span>, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasGradient/addColorStop" target="_blank" rel="noopener"><code>gradient.addColorStop(position, color)</code></a></p>
+<p><code>addColorStop</code> 方法接受 2 个参数，<code>position</code> 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。<code>color</code> 参数必须是一个有效的 <code>CSS</code> 颜色值（如 <code>#FFF</code>， <code>rgba(0,0,0,1)</code>，等等）。</p>
+<p>你可以根据需要添加任意多个色标（color stops）。下面是最简单的线性黑白渐变的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lineargradient = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br><span class="line">lineargradient.addColorStop(<span class="number">0</span>, <span class="string">'write'</span>);</span><br><span class="line">lineargradient.addColorStop(<span class="number">1</span>, <span class="string">'black'</span>);</span><br></pre></td></tr></table></figure>
+<h3><span id="createlineargradient的例子"><code>createLinearGradient</code>的例子</span></h3>
+<p>本例中，我弄了两种不同的渐变。第一种是背景色渐变，你会发现，我给同一位置设置了两种颜色，你也可以用这来实现突变的效果，就像这里从白色到绿色的突变。一般情况下，色标的定义是无所谓顺序的，但是色标位置重复时，顺序就变得非常重要了。所以，保持色标定义顺序和它理想的顺序一致，结果应该没什么大问题。</p>
+<p>第二种渐变，我并不是从 0.0 位置开始定义色标，因为那并不是那么严格的。在 0.5 处设一黑色色标，渐变会默认认为从起点到色标之间都是黑色。</p>
+<p>你会发现，<code>strokeStyle</code> 和 <code>fillStyle</code> 属性都可以接受 <code>canvasGradient</code> 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;  <span class="keyword">const</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);  <span class="comment">// Create gradients  const lingrad = ctx.createLinearGradient(0,0,0,150);  lingrad.addColorStop(0, '#00ABEB');  lingrad.addColorStop(0.5, '#fff');  lingrad.addColorStop(0.5, '#26C000');  lingrad.addColorStop(1, '#fff');  const lingrad2 = ctx.createLinearGradient(0,50,0,95);  lingrad2.addColorStop(0.5, '#000');  lingrad2.addColorStop(1, 'rgba(0,0,0,0)');  // assign gradients to fill and stroke styles  ctx.fillStyle = lingrad;  ctx.strokeStyle = lingrad2;  // draw shapes  ctx.fillRect(10,10,130,130);  ctx.strokeRect(50,50,50,50);&#125;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_lineargradient.png" title="This is an canvas example image">
+<h3><span id="createradialgradient的例子"><code>createRadialGradient</code>的例子</span></h3>
+<p>这个例子，我定义了 4 个不同的径向渐变。由于可以控制渐变的起始与结束点，所以我们可以实现一些比（如在 Photoshop 中所见的）经典的径向渐变更为复杂的效果。（经典的径向渐变是只有一个中心点，简单地由中心点向外围的圆形扩张）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);  <span class="comment">// 创建渐变  var radgrad = ctx.createRadialGradient(45,45,10,52,50,30);  radgrad.addColorStop(0, '#A7D30C');  radgrad.addColorStop(0.9, '#019F62');  radgrad.addColorStop(1, 'rgba(1,159,98,0)');  var radgrad2 = ctx.createRadialGradient(105,105,20,112,120,50);  radgrad2.addColorStop(0, '#FF5F98');  radgrad2.addColorStop(0.75, '#FF0188');  radgrad2.addColorStop(1, 'rgba(255,1,136,0)');  var radgrad3 = ctx.createRadialGradient(95,15,15,102,20,40);  radgrad3.addColorStop(0, '#00C9FF');  radgrad3.addColorStop(0.8, '#00B5E2');  radgrad3.addColorStop(1, 'rgba(0,201,255,0)');  var radgrad4 = ctx.createRadialGradient(0,150,50,0,140,90);  radgrad4.addColorStop(0, '#F4F201');  radgrad4.addColorStop(0.8, '#E4C700');  radgrad4.addColorStop(1, 'rgba(228,199,0,0)');  // 画图形  ctx.fillStyle = radgrad4;  ctx.fillRect(0,0,150,150);  ctx.fillStyle = radgrad3;  ctx.fillRect(0,0,150,150);  ctx.fillStyle = radgrad2;  ctx.fillRect(0,0,150,150);  ctx.fillStyle = radgrad;  ctx.fillRect(0,0,150,150);&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这里，我让起点稍微偏离终点，这样可以达到一种球状 3D 效果。</p>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_radialgradient.png" title="This is an canvas example image">
+<p>4 个径向渐变效果的最后一个色标都是透明色。如果想要两色标直接的过渡柔和一些，只要两个颜色值一致就可以了。代码里面看不出来，是因为我用了两种不同的颜色表示方法，但其实是相同的，<code>#019F62 = rgba(1,159,98,1)。</code></p>
+<h2><span id="图案样式-patterns">图案样式 Patterns</span></h2>
+<p><code>createPattern(image, type)</code>用于实现图案的效果是非常简单的方法。</p>
+<p>该方法接受两个参数。Image 可以是一个 <code>Image</code> 对象的引用，或者另一个 canvas 对象。<code>Type</code> 必须是下面的字符串值之一：<code>repeat</code>，<code>repeat-x</code>，<code>repeat-y</code> 和 <code>no-repeat</code>。</p>
+<h3><span id="createpattern的例子"><code>createPattern</code>的例子</span></h3>
+<p>创建一个图案然后赋给了 <code>fillStyle</code> 属性。唯一要注意的是，使用 Image 对象的 <code>onload</code> handler 来确保设置图案之前图像已经装载完毕。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);  <span class="comment">// 创建新 image 对象，用作图案  var img = new Image();  img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png';  img.onload = function() &#123;    // 创建图案    var ptrn = ctx.createPattern(img, 'repeat');    ctx.fillStyle = ptrn;    ctx.fillRect(0, 0, 150, 150);  &#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/Canvas_createpattern.png" title="This is an canvas example image">
+<h2><span id="阴影-shadows">阴影 Shadows</span></h2>
+<ul>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/shadowOffsetX" target="_blank" rel="noopener"><code>shadowOffsetX = float</code></a></p>
+<p><code>shadowOffsetX</code> 和 <code>shadowOffsetY</code>用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 <code>0</code>。</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/shadowOffsetY" target="_blank" rel="noopener"><code>shadowOffsetY = float</code></a></p>
+<p>shadowOffsetX 和 <code>shadowOffsetY</code>用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 <code>0</code>。</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/shadowBlur" target="_blank" rel="noopener"><code>shadowBlur = float</code></a></p>
+<p>shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 <code>0</code>。</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/shadowColor" target="_blank" rel="noopener"><code>shadowColor = color</code></a></p>
+<p>shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。</p>
+</li>
+</ul>
+<h3><span id="文字阴影的例子">文字阴影的例子</span></h3>
+<p>这个例子绘制了带阴影效果的文字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">  ctx.shadowOffsetX = <span class="number">2</span>;</span><br><span class="line">  ctx.shadowOffsetY = <span class="number">2</span>;</span><br><span class="line">  ctx.shadowBlur = <span class="number">2</span>;</span><br><span class="line">  ctx.shadowColor = <span class="string">'rgba(0, 0, 0, 0.5)'</span>;</span><br><span class="line">  ctx.font = <span class="string">'20px Times New Roman'</span>;</span><br><span class="line">  ctx.fillStyle = <span class="string">'Black'</span>;</span><br><span class="line">  ctx.fillText(<span class="string">'Sample String'</span>, <span class="number">5</span>, <span class="number">30</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<img src="/article/canvas-style-color/shadowed-string.png" title="This is an canvas example image">
+<h2><span id="canvas-填充规则">Canvas 填充规则</span></h2>
+<p>当我们用到 <code>fill</code>（或者 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/clip" target="_blank" rel="noopener"><code>clip</code></a>和<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CanvasRenderingContext2D/isPointInPath" target="_blank" rel="noopener"><code>isPointinPath</code></a> ）你可以选择一个填充规则，该填充规则根据某处在路径的外面或者里面来决定该处是否被填充，这对于自己与自己路径相交或者路径被嵌套的时候是有用的。</p>
+<p>两个可能的值：</p>
+<ul>
+<li><code>&quot;nonzero&quot;</code>: 顾名思意就是“非零规则”，用通俗的话讲，就算计算某些东西是不是<code>0</code>，如果不是<code>0</code>则内部，填充；如果是<code>0</code>则外部，不填充。</li>
+<li><code>&quot;evenodd&quot;</code>: 顾名思意就是“奇偶规则”，用通俗的话讲，就算计算某些东西是不是奇数，如果是是奇数则内部，填充；如果是偶数则外部，不填充。</li>
+</ul>
+<p>下面关键来了，这里的“计算某些东西”究竟计算的是什么东西呢？</p>
+<p>nonzero 规则和 evenodd 规则计算的东西还不一样，nonzero 是计算顺时针逆时针数量，evenodd 是交叉路径数量。</p>
+<p>下面例子分别查看一下两种效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// evenodd</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">false</span>);</span><br><span class="line">  ctx.fill(<span class="string">'nonzero'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span><br><span class="line">  ctx.beginPath();</span><br><span class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">true</span>);</span><br><span class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>, <span class="literal">false</span>);</span><br><span class="line">  ctx.fill(<span class="string">'evenodd'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两段代码效果均如下所示：</p>
+<img src="/article/canvas-style-color/fill-rule.png" title="This is an canvas example image">
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/canvas-draw-graphics/" data-toggle="tooltip" data-placement="top" title="Canvas--绘制图形">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">使用样式和颜色</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">色彩 Colors</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">fillStyle示例</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">strokeStyle示例</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">透明度 Transparency</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">globalAlpha示例</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">rgba()示例</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">线型 Line styles</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">lineWidth 属性的例子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">lineCap 属性的例子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.3.</span> <span class="toc-nav-text">lineJoin 属性的例子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.4.</span> <span class="toc-nav-text">miterLimit 属性的例子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.5.5.</span> <span class="toc-nav-text">使用虚线</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">渐变</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">createLinearGradient的例子</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">createRadialGradient的例子</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">图案样式 Patterns</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.7.1.</span> <span class="toc-nav-text">createPattern的例子</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">阴影 Shadows</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.8.1.</span> <span class="toc-nav-text">文字阴影的例子</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">Canvas 填充规则</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Canvas" title="Canvas">Canvas</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/clown-helang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 何浪 2022 
+                    <br>
+                    <!--Theme by <a href="http://beantech.org">BeanTech</a> -->
+                    <!--<span style="display: inline-block; margin: 0 5px;">-->
+                        <!--<i class="fa fa-heart"></i>-->
+                    <!--</span> -->
+                    <!--re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | -->
+                    <!--<iframe-->
+                        <!--style="margin-left: 2px; margin-bottom:-5px;"-->
+                        <!--frameborder="0" scrolling="0" width="91px" height="20px"-->
+                        <!--src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >-->
+                    <!--</iframe>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.helang.site/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'r45fhy7653897235wg5ye709d930f62e';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.helang.site/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
