@@ -135,14 +135,6 @@
     </url>
 
     <url>
-        <loc>http://www.helang.site/article/js-inherit/</loc>
-        <lastmod>2021-05-23T13:39:37.118Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://www.helang.site/article/install-nginx/</loc>
         <lastmod>2021-05-23T13:39:37.118Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -152,6 +144,14 @@
 
     <url>
         <loc>http://www.helang.site/article/js-function/</loc>
+        <lastmod>2021-05-23T13:39:37.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.helang.site/article/js-inherit/</loc>
         <lastmod>2021-05-23T13:39:37.118Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
