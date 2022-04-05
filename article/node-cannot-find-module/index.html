@@ -28,11 +28,11 @@
     </script>
     <title>
         
-          About - 何浪 | 博客
+          Node：找不到全局安装的模块 - 何浪 | 博客
         
     </title>
 
-    <link rel="canonical" href="http://www.helang.site/about/">
+    <link rel="canonical" href="http://www.helang.site/article/node-cannot-find-module/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -83,8 +83,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/about.jpg')
-            /*page*/
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
         
     }
     
@@ -97,10 +97,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>About</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">一入前端深似海，从此再无安宁日</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#NodeJS" title="NodeJS">NodeJS</a>
+                            
+                        </div>
+                        <h1>Node：找不到全局安装的模块</h1>
+                        <h2 class="subheading">常见问题</h2>
+                        <span class="meta">
+                            Posted by 何浪 on
+                            2022-04-05
+                        </span>
                     </div>
                 
 
@@ -203,190 +211,178 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <h3><span id="一句话">一句话</span></h3>
-<blockquote>
-<p>一位奋进在WEB前端道路上的掘金者</p>
-</blockquote>
-<h3><span id="关于我">关于我</span></h3>
-<blockquote>
-<p>爱技术、爱思考、爱折腾、爱运动、爱自由</p>
-<p>对生活充满热情，对工作充满激情，对家庭充满憧憬！</p>
-</blockquote>
-<h3><span id="兴趣方向">兴趣方向</span></h3>
-<blockquote>
-<p>WEB前端（React、React Native、VUE）相关生态技术研究。</p>
-</blockquote>
-<h3><span id="参与社区">参与社区</span></h3>
-<blockquote>
-<p>react中国: <a href="http://react-china.org/u/clown-helang/" target="_blank" rel="noopener">http://react-china.org/u/clown-helang/</a></p>
-<p>Github: <a href="https://github.com/clown-helang" target="_blank" rel="noopener">https://github.com/clown-helang</a></p>
-</blockquote>
-<h3><span id="联系我">联系我</span></h3>
-<blockquote>
-<p>Email: <a href="mailto:sust_helang@126.com" target="_blank" rel="noopener">sust_helang@126.com</a></p>
-</blockquote>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
+                <h2><span id="问题背景">问题背景</span></h2>
+<p>在<a href="https://www.helang.site/article/node-nvm/">Windows 环境下 nvm 的安装与使用</a>篇章中我们学会了如何使用<code>nvm</code>方便快速的切换<code>node</code>的版本，但是却发现在写<code>node</code>脚本的时候，总是会出现：<code>Error: Cannot find module 'xxxxxx'</code>的报错情况。<strong>即使模块已经全局安装过了依旧还是找不到</strong>。这是什么原因又该怎么办呢？</p>
+<h2><span id="问题原因">问题原因</span></h2>
+<p>想要找到原因就需要用到一个非常关键的一个命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 打印本地目录前缀</span><br><span class="line">npm prefix [-g]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果没有<code>-g</code>参数，返回的是包含<code>package.json</code>文件或<code>node_modules</code>目录的最近的<strong>父目录</strong>。如果既没有<code>package.json</code>也没有<code>node_modules</code>那么就返回<strong>当前文件</strong>所在的目录。</p>
+<img src="/article/node-cannot-find-module/image-20220405113420760.png" title="This is an download page image">
+<p>如果带有<code>-g</code>参数，它就是全局目录前缀。</p>
+<img src="/article/node-cannot-find-module/image-20220405113614478.png" title="This is an download page image">
+</blockquote>
+<p>对于我们当前遇到的问题就可以使用带<code>-g</code>的命令先找到我们的<code>npm</code>包全局到底是安装在了哪里。如上图所示，我当前机器上面的全局<code>npm</code>包是安装在<code>C:\Program Files\nodejs</code>下面。</p>
+<p>知道在哪里安装着，下面就看看当前可查找的包都有哪些，可以通过<code>node</code>环境下执行<code>module.paths</code>查看是否包含该目录：</p>
+<img src="/article/node-cannot-find-module/image-20220405122152302.png" title="This is an download page image">
+<p>从上图可以看出，当前<code>module.paths</code>的目录虽然包含有<code>C:\\Program Files\\nodejs\\lib\\node</code>，但是不包含<code>C:\Program Files\nodejs\node_modules</code>。所以找不到相应的全局包是正常现象。那么，为什么会出现这种情况呢？</p>
+<p>我们通过文件管理器打开这个目录看看是什么情况。</p>
+<img src="/article/node-cannot-find-module/image-20220405114303174.png" title="This is an download page image">
+<p>可以看到这里的<code>nodejs</code>目录是一个<strong>快捷方式</strong>。打开文件属性查看，其真实目标为<code>nvm</code>下面对应的 node 版本的路径。</p>
+<img src="/article/node-cannot-find-module/image-20220405114428408.png" title="This is an download page image">
+<p>至此，我们的问题大致可以确认我们的问题所在：<strong>由于使用<code>NVM</code>对<code>node</code>进行管理，我们切换了指定的<code>node</code>版本导致原来的<code>NODE_PATH</code>环境变量发生了变化，所以导致在全局使用的时候找不到相应的<code>npm</code>包。</strong></p>
+<h2><span id="解决办法">解决办法</span></h2>
+<p>既然是因为<code>NODE_PATH</code>的问题，那么我们重新配置一下<code>NODE_PATH</code>即可。</p>
+<img src="/article/node-cannot-find-module/image-20220405123245627.png" title="This is an download page image">
+<p>配置完成，即可重新打开命令窗口验证问题是否还存在。</p>
+<img src="/article/node-cannot-find-module/image-20220405123813004.png" title="This is an download page image">
+<p>可以看到<code>module.paths</code>中已经包含了<code>C:\Program Files\nodejs\node_modules</code>目录了。此时再通过<code>require</code>引用全局<code>npm</code>包也不再报<code>Error: Cannot find module 'xxxxxx'</code>的错误了。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/canvas-style-color/" data-toggle="tooltip" data-placement="top" title="Canvas--添加样式和颜色">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
                 <br>
-
+                
                 <!-- require APlayer -->
                 
-                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-                    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/meting@1.2/dist/Meting.min.js"></script>
+
+                <!-- duoshuo Share start -->
                 
-                    <div class="aplayer"
-                        data-id="2312165875"
-                        data-server="netease"
-                        data-type="playlist"
-                        data-fixed="false" >
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">问题背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">问题原因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#null"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">解决办法</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#NodeJS" title="NodeJS">NodeJS</a>
+                        
                     </div>
+                </section>
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- Friends Blog -->
                 
-                    <hr>
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
 
                     
-
+                        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
                     
-
-                    
-
-                    
-
-                    
-
-                    
-
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Canvas" title="Canvas" rel="3">Canvas</a>
-            
-        
-            
-            <a href="/tags/#Arithmetic" title="Arithmetic" rel="3">Arithmetic</a>
-            
-        
-            
-            <a href="/tags/#Javascript" title="Javascript" rel="6">Javascript</a>
-            
-        
-            
-            <a href="/tags/#Nginx" title="Nginx" rel="4">Nginx</a>
-            
-        
-            
-            <a href="/tags/#NodeJS" title="NodeJS" rel="2">NodeJS</a>
-            
-        
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/avatar.jpg" />
-        
 
-        
-            <p>Stay hungry,Stay foolish</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/clown-helang">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        <!-- Friends Blog -->
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://www.zhihu.com/people/helang582/activities" target="_blank">何浪-知乎</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
